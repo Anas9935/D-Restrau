@@ -23,6 +23,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.bumptech.glide.Glide;
 import com.example.drestrau.Activities.Authentication.Register;
@@ -49,7 +50,7 @@ import java.util.ArrayList;
 
 public class ManagerActivity extends AppCompatActivity {
     String rid,uid;
-    ImageView viewStaff,payment,food;
+    ConstraintLayout viewStaff,payment,food;
     ImageView spec1,spec2,spec3;
     TextView name1,name2,name3;
 

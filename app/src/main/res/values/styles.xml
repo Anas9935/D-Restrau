@@ -7,10 +7,12 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
     <style name="CustomTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/myColorPrimary</item>
         <item name="colorPrimaryDark">@color/myColorPrimaryDark</item>
@@ -18,16 +20,22 @@
         <item name="android:textColor">#000</item>
 
     </style>
-<style name="Mytheme" parent="Theme.Design.Light.NoActionBar">
-    <item name="colorPrimary">@color/myColorPrimary</item>
-    <item name="colorPrimaryDark">@color/myColorPrimaryDark</item>
-    <item name="colorAccent">@color/myColorAccent</item>
-    <item name="android:textColor">#000</item>
-</style>
+
+    <style name="Mytheme" parent="Theme.Design.Light.NoActionBar">
+        <item name="colorPrimary">@color/myColorPrimary</item>
+        <item name="colorPrimaryDark">@color/myColorPrimaryDark</item>
+        <item name="colorAccent">@color/myColorAccent</item>
+        <item name="android:textColor">#000</item>
+    </style>
+
     <style name="myThemeWithAction" parent="Theme.Design.Light">
         <item name="colorPrimary">@color/myColorPrimary</item>
         <item name="colorPrimaryDark">@color/myColorPrimaryDark</item>
         <item name="colorAccent">@color/myColorAccent</item>
         <item name="android:textColor">#000</item>
     </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

@@ -19,12 +19,12 @@
         android:id="@+id/recep_todo_nametv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView6"
         app:layout_constraintStart_toEndOf="@+id/textView6"
         app:layout_constraintTop_toTopOf="@+id/textView6"
-        tools:text="@tools:sample/full_names"
-        />
+        app:layout_constraintVertical_bias="0.0"
+        tools:text="@tools:sample/full_names" />
 
     <TextView
         android:id="@+id/textView11"
@@ -38,13 +38,13 @@
         android:id="@+id/recep_todo_pidTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="amsbadvfelhvlvsclhvsclhvslidsvbl"
-        app:layout_constraintStart_toStartOf="@+id/recep_todo_nametv"
-        app:layout_constraintTop_toTopOf="@+id/textView11"
+        android:layout_marginStart="8dp"
+        android:ellipsize="end"
         android:maxWidth="150dp"
         android:maxLines="1"
-        android:ellipsize="end"
-        />
+        android:text="amsbadvfelhvlvsclhvsclhvslidsvbl"
+        app:layout_constraintStart_toEndOf="@+id/textView11"
+        app:layout_constraintTop_toTopOf="@+id/textView11" />
 
     <TextView
         android:id="@+id/recep_todo_amount"

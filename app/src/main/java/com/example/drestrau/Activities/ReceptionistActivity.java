@@ -155,7 +155,7 @@ IntentIntegrator qrcode;
                 if (obj != null) {
                     recepObject = new RecepObject(obj.getPid(),obj.getUid(),rid,obj.getTotal(),obj.getStatus(),obj.getMode(),1);
                     adapter.add(recepObject);
-                    Log.e("ths", "onChildAdded: "+list.size() );
+                  //  Log.e("ths", "onChildAdded: "+list.size() );
                 }
             }
 

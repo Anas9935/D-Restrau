@@ -26,6 +26,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -46,12 +48,13 @@ ArrayList<MyOrderObject> list;
 MyOrderAdapter adapter;
 RecyclerView rv;
     private String TAG="TestingActivity";
-    OrderDatabase mInstance;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_testing);
+
 
         rest=findViewById(R.id.test_rest_btn);
         food=findViewById(R.id.test_food_btn);
@@ -69,13 +72,7 @@ RecyclerView rv;
             public void onClick(View v) {
             }
         });
-        list=new ArrayList<>();
-        mInstance= OrderDatabase.getInstance(this);
-        List<MyOrderObject> lst=mInstance.objectDao().loadAllObjects();
-        list.addAll(lst);
-        adapter=new MyOrderAdapter(this,list);
-        rv.setAdapter(adapter);
-        rv.setLayoutManager(new LinearLayoutManager(this));
+
 
     }
 

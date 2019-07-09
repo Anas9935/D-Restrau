@@ -24,25 +24,26 @@
         tools:replace="android:appComponentFactory">
         <activity
             android:name=".Activities.User.GeneralUserNew"
-            android:label="@string/title_activity_general_user_new"></activity>
+            android:label="@string/title_activity_general_user_new" />
         <activity android:name=".Activities.ManualAttendenceActivity" />
         <activity android:name=".Activities.Manager.MessageActivity" />
         <activity android:name=".Activities.Manager.PaymentForManagerActivity" />
-        <activity
-            android:name=".Activities.User.PaymentForFoodActivity" />
+        <activity android:name=".Activities.User.PaymentForFoodActivity" />
         <activity android:name=".Activities.Manager.ManagerChooseSpecial" />
         <activity android:name=".Activities.QrCodeActivity" />
-        <activity android:name=".Activities.SimpleStaffActivity"
-            android:theme="@style/myThemeWithAction"
-            />
-        <activity android:name=".Activities.ReceptionistActivity"
-            android:theme="@style/myThemeWithAction"
-            />
-        <activity android:name=".Activities.ChefActivity"
-            android:theme="@style/myThemeWithAction"
-            />
+        <activity
+            android:name=".Activities.SimpleStaffActivity"
+            android:theme="@style/myThemeWithAction" />
+        <activity
+            android:name=".Activities.ReceptionistActivity"
+            android:theme="@style/myThemeWithAction" />
+        <activity
+            android:name=".Activities.ChefActivity"
+            android:theme="@style/myThemeWithAction" />
         <activity android:name=".Activities.Manager.EditMenuActivity" />
-        <activity android:name=".Activities.User.ProfileActivity" />
+        <activity android:name=".Activities.User.ProfileActivity"
+            android:theme="@style/Mytheme"
+            />
         <activity android:name=".Activities.Manager.AllStaff" />
         <activity android:name=".Activities.User.addRestrau" />
         <activity android:name=".TestingActivity" />
@@ -50,9 +51,9 @@
         <activity android:name=".Activities.User.MenuActivity" />
         <activity android:name=".Activities.Manager.ManagerActivity" />
         <activity android:name=".Activities.Authentication.Register" />
-        <activity android:name=".Activities.Manager.addStaff"
-            android:theme="@style/myThemeWithAction"
-            />
+        <activity
+            android:name=".Activities.Manager.addStaff"
+            android:theme="@style/myThemeWithAction" />
         <activity android:name=".Activities.Authentication.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

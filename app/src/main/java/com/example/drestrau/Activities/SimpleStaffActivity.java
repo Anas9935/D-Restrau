@@ -52,6 +52,7 @@ MessageAdapter adapter;
 ArrayList<messageObject> list;
 ArrayList<menuObject> menu;
 
+    String staffId;
 EditText messManager;
 ImageView send;
 //LinearLayout ll;
@@ -67,6 +68,7 @@ ConstraintLayout cl;
         Log.e("SimpleStaff  ", "onCreate: "+rid );
         uid= FirebaseAuth.getInstance().getUid();
         initialiseViews();
+
         if(desig==3||desig==5||desig==6||desig==7){
             cl.setVisibility(View.GONE);
             tableSel.setVisibility(View.GONE);
@@ -92,6 +94,7 @@ ConstraintLayout cl;
         });
 
     }
+
 
 
 
@@ -368,6 +371,7 @@ ConstraintLayout cl;
     }
 
     private void populateDrawer(){
+
         FirebaseDatabase.getInstance().getReference("users").child(uid).child("name").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -392,6 +396,8 @@ ConstraintLayout cl;
                     Glide.with(SimpleStaffActivity.this)
                             .load(obj.getPicUrl())
                             .into(profileImg);
+                    //here we take image url and staff id
+                    staffId=dataSnapshot.getKey();
                 }
             }
 
@@ -427,9 +433,12 @@ ConstraintLayout cl;
         item1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(SimpleStaffActivity.this,QrCodeActivity.class);
-                intent.putExtra("rid",rid);
-                startActivity(intent);
+                if(staffId!=null) {
+                    Intent intent = new Intent(SimpleStaffActivity.this, QrCodeActivity.class);
+                    intent.putExtra("rid", rid);
+                    intent.putExtra("staffId",staffId );
+                    startActivity(intent);
+                }
             }
         });
         item2.setOnClickListener(new View.OnClickListener() {

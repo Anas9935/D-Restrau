@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
     <ListView
         android:id="@+id/recep_lv"
         android:layout_width="match_parent"
@@ -54,6 +55,8 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
         android:text="New Reservation"
         app:layout_constraintBottom_toTopOf="@+id/recep_newRes"
         app:layout_constraintEnd_toStartOf="@+id/recep_newRes"
@@ -66,6 +69,8 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:text="Scan"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
         android:layout_marginStart="8dp"
         app:layout_constraintBottom_toTopOf="@+id/recep_scan_atten"
         app:layout_constraintEnd_toStartOf="@+id/recep_scan_atten"

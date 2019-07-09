@@ -2,6 +2,7 @@ package com.example.drestrau.Activities;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -48,12 +49,14 @@ allStaffAdapter adapter;
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final staffForListObject object=list.get(position);
-                FirebaseDatabase.getInstance().getReference("attendance").child(rid).child(object.getStaffUid()).addValueEventListener(new ValueEventListener() {
+
+                FirebaseDatabase.getInstance().getReference("attendance").child(rid).child(object.getStaffId()).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         attendanceObject obj=dataSnapshot.getValue(attendanceObject.class);
                         int dc;
                         if(obj!=null){
+                            if(obj.getAttendenceToday()!=0){
                             dc = obj.getDayCount();
                             dc+=1;
                             obj.setDayCount(dc);
@@ -64,11 +67,12 @@ allStaffAdapter adapter;
                             FirebaseDatabase.getInstance().getReference("attendance").child(rid).child(object.getStaffUid()).setValue(obj);
                             Toast.makeText(ManualAttendenceActivity.this, "Attendance done", Toast.LENGTH_SHORT).show();
                         }
+                        }else{Toast.makeText(ManualAttendenceActivity.this,"Attendance Already Done",Toast.LENGTH_SHORT).show();}
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                        Log.e("this", "onItemClick: error occurred" );
                     }
                 });
             }

@@ -18,6 +18,7 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
@@ -29,16 +30,16 @@ import static android.graphics.Color.WHITE;
 
 public class QrCodeActivity extends AppCompatActivity {
     private static final int WIDTH = 275;
-    String rid;
+    String rid,staffId;
 TextView name,sid;
 ImageView qrcode,qrStatus;
-boolean isAttended=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr_code);
 
         rid=getIntent().getStringExtra("rid");
+        staffId=getIntent().getStringExtra("staffId");
         name=findViewById(R.id.qr_name);
         sid=findViewById(R.id.qr_sid);
         qrcode=findViewById(R.id.qr_imgCode);
@@ -46,16 +47,28 @@ boolean isAttended=false;
         Log.e("rid", "onCreate: "+rid );
            getSid();
         getAttendenceDetail();
-        if(isAttended){
-            qrStatus.setImageResource(R.drawable.check_pastel);
-        }else{
-            qrStatus.setImageResource(R.drawable.cross_pastel);
-        }
-
-
     }
     private void getAttendenceDetail(){
         //TODO get the details of the staff from attendence table
+        FirebaseDatabase.getInstance().getReference("attendance").child(staffId).child("attendanceToday").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Integer att=dataSnapshot.getValue(Integer.class);
+                if(att!=null){
+                    if (att == 0) {
+                        qrStatus.setImageResource(R.drawable.cross_pastel);
+                    } else {
+                        qrStatus.setImageResource(R.drawable.check_pastel);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
     private void getSid(){
         final String uid=FirebaseAuth.getInstance().getUid();

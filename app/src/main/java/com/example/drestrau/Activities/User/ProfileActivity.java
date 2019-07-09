@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.bumptech.glide.Glide;
@@ -34,6 +37,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -55,7 +60,8 @@ public class ProfileActivity extends AppCompatActivity {
     String uid;
 String sid,rid,picUrl;
 int salary;
-TextView name,edit,email,phno1,phno2,address1,address2,id,pin;
+TextView name,email,phno1,phno2,address1,address2,id,pin;
+Toolbar toolbar;
 ImageView img,cam;
 TextView pres,abs,sal,register_rest;
 LinearLayout attendanceLayout;
@@ -72,6 +78,53 @@ Bitmap bitmapImage;
         salary=getIntent().getIntExtra("salary",-1);
         initialiseViews();
         getId();
+
+
+        final CollapsingToolbarLayout collapsingToolbar =
+                (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
+        AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.app_bar);
+        toolbar=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.action_profile_edit:{
+                        if(sid!=null){
+                            cam.setVisibility(View.VISIBLE);
+                        }
+                        editDialog();
+                        return true;
+                    }
+                    default:return  ProfileActivity.super.onMenuItemSelected(0,item);
+                }
+            }
+        });
+
+        collapsingToolbar.setTitle("");
+        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            boolean isShow = false;
+            int scrollRange = -1;
+
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                if (scrollRange == -1) {
+                    scrollRange = appBarLayout.getTotalScrollRange();
+                }
+                if (scrollRange + verticalOffset == 0) {
+                    collapsingToolbar.setTitle("Profile");
+                    isShow = true;
+                } else if (isShow) {
+                    collapsingToolbar.setTitle("");
+                    isShow = false;
+                }
+            }
+        });
+
+
+
+
         if(sid!=null){
             attendanceLayout.setVisibility(View.VISIBLE);
             getImageAndAttendance(sid);
@@ -86,15 +139,6 @@ Bitmap bitmapImage;
             }
         });
 
-        edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(sid!=null){
-                    cam.setVisibility(View.VISIBLE);
-                }
-                editDialog();
-            }
-        });
         register_rest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -174,7 +218,6 @@ Bitmap bitmapImage;
 
     private void initialiseViews(){
         name=findViewById(R.id.profile_name);
-        edit=findViewById(R.id.profile_edit_btn);
         email=findViewById(R.id.profile_email);
         phno1=findViewById(R.id.profile_ph1);
         phno2=findViewById(R.id.profile_ph2);
@@ -376,5 +419,11 @@ Bitmap bitmapImage;
                 break;
             }
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.profile_menu,menu);
+        return  true;
     }
 }
