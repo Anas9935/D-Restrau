@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="designation"
+        >
+        <item>Receptionist</item>
+        <item>Chef</item>
+        <item>Cook</item>
+        <item>DishWasher</item>
+        <item>Serving staff</item>
+        <item>Cleaning Staff</item>
+        <item>Bartender</item>
+        <item>Guard</item>
+        <!--8<item>Manager</item>-->
+    </string-array>
+    <string-array name="gender"
+        >
+        <item>Male</item>
+        <item>Female</item>
+        <item>others</item>
+    </string-array>
+    <string-array name="paymentMode">
+        <item>Cash</item>
+        <item>Card</item>
+        <item>Paytm</item>
+    </string-array>
+    <string-array name="paymentStatus">
+        <item>Unpaid</item>
+        <item>Partial</item>
+        <item>Paid</item>
+    </string-array>
+    <string-array name="timeSlot">
+        <item>Choose Time</item>
+        <item>9:00 – 10:30</item>
+        <item>10:30 – 12:00</item>
+        <item>12:00 – 13:30</item>
+        <item>13:30 – 15:00</item>
+        <item>15:00 – 16:30</item>
+        <item>16:30 – 18:00</item>
+        <item>18:00 – 19:30</item>
+        <item>19:30 – 21:00</item>
+        <item>21:00 – 22:30</item>
+    </string-array>
+
+</resources>

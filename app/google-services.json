@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "603976073792",
+    "firebase_url": "https://d-restau.firebaseio.com",
+    "project_id": "d-restau",
+    "storage_bucket": "d-restau.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:603976073792:android:79263577f936c6ef",
+        "android_client_info": {
+          "package_name": "com.example.drestrau"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "603976073792-i2shcivvgo026joal8o7jehucc0ga24t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.drestrau",
+            "certificate_hash": "100237b9a29f866fde86f560b3dbe1d2fdabd52f"
+          }
+        },
+        {
+          "client_id": "603976073792-ko1vc978cl1p50n27ng9bp3b8fnpepdr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAChnqS7FyUmSxXCd62xGZVytecMAYBWCM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "603976073792-ko1vc978cl1p50n27ng9bp3b8fnpepdr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

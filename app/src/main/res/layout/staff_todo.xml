@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+<!--<LinearLayout-->
+    <!--android:id="@+id/staff_todo_root_layout"-->
+    <!--android:orientation="horizontal" android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--&gt;-->
+    <!--&lt;!&ndash;<ImageView&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_width="60dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_height="60dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_margin="16dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:id="@+id/staff_list_image"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:scaleType="fitCenter"&ndash;&gt;-->
+        <!--&lt;!&ndash;tools:src="@tools:sample/avatars"&ndash;&gt;-->
+        <!--&lt;!&ndash;/>&ndash;&gt;-->
+   <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_width="0dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_weight="3"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:orientation="horizontal"&ndash;&gt;-->
+       <!--&lt;!&ndash;android:layout_gravity="center_vertical"&ndash;&gt;-->
+        <!--&lt;!&ndash;&gt;&ndash;&gt;-->
+       <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
+           <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+           <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+           <!--&lt;!&ndash;android:orientation="vertical"&ndash;&gt;-->
+           <!--&lt;!&ndash;android:layout_gravity="center_vertical"&ndash;&gt;-->
+           <!--&lt;!&ndash;&gt;&ndash;&gt;-->
+           <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+               <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+               <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+               <!--&lt;!&ndash;android:text="NAME"&ndash;&gt;-->
+               <!--&lt;!&ndash;android:textSize="20sp"&ndash;&gt;-->
+               <!--&lt;!&ndash;android:layout_marginStart="16dp"&ndash;&gt;-->
+               <!--&lt;!&ndash;android:layout_marginEnd="16dp"&ndash;&gt;-->
+               <!--&lt;!&ndash;android:id="@+id/staff_list_name"&ndash;&gt;-->
+               <!--&lt;!&ndash;tools:text="@tools:sample/full_names"&ndash;&gt;-->
+               <!--&lt;!&ndash;/>&ndash;&gt;-->
+           <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+               <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+               <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+               <!--&lt;!&ndash;android:text="Id - 5"&ndash;&gt;-->
+               <!--&lt;!&ndash;android:layout_marginStart="25dp"&ndash;&gt;-->
+               <!--&lt;!&ndash;android:id="@+id/staff_list_id"&ndash;&gt;-->
+               <!--&lt;!&ndash;tools:text="@tools:sample/lorem"&ndash;&gt;-->
+               <!--&lt;!&ndash;/>&ndash;&gt;-->
+           <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+               <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+               <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+               <!--&lt;!&ndash;android:layout_marginStart="25dp"&ndash;&gt;-->
+               <!--&lt;!&ndash;android:id="@+id/staff_list_desig"&ndash;&gt;-->
+               <!--&lt;!&ndash;tools:text="Waiter"&ndash;&gt;-->
+               <!--&lt;!&ndash;/>&ndash;&gt;-->
+       <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+
+
+        <!--&lt;!&ndash;<ImageView&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/staff_list_messageBtn"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="0dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_weight="1"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
+            <!--&lt;!&ndash;app:srcCompat="@drawable/ic_message_black_24dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:padding="16dp"&ndash;&gt;-->
+
+            <!--&lt;!&ndash;/>&ndash;&gt;-->
+        <!--&lt;!&ndash;<ImageView&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="0dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_weight="1"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
+            <!--&lt;!&ndash;app:srcCompat="@drawable/ic_call_black_24dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:padding="12dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/staff_list_callBtn"&ndash;&gt;-->
+            <!--&lt;!&ndash;/>&ndash;&gt;-->
+
+
+    <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+
+
+
+    <!--</LinearLayout>-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/staff_todo_root_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteY="482dp"
+        android:background="@android:drawable/dialog_holo_light_frame"
+        >
+
+        <ImageView
+            android:id="@+id/staff_list_image"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/staff_list_messageBtn"
+            app:layout_constraintStart_toEndOf="@+id/staff_list_image"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/staff_list_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="NAME"
+                android:textSize="20sp"
+                tools:text="@tools:sample/full_names" />
+
+            <TextView
+                android:id="@+id/staff_list_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:text="Id - 5"
+                tools:text="@tools:sample/lorem" />
+
+            <TextView
+                android:id="@+id/staff_list_desig"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                tools:text="Waiter" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/staff_list_messageBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/staff_list_callBtn"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_message_black_24dp" />
+
+        <ImageView
+            android:id="@+id/staff_list_callBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_call_black_24dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

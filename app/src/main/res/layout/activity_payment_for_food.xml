@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.User.PaymentForFoodActivity"
+    android:id="@+id/payment_FrameLayout"
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/payment_partial_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Partial Pay"
+            android:checked="true"
+            />
+        <RadioButton
+            android:id="@+id/payment_Full_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Full Pay"
+            />
+    </RadioGroup>
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Payable amount "
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="₹"
+        />
+    <TextView
+        android:id="@+id/payment_amountToPay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="500"
+        />
+</LinearLayout>
+    <Button
+        android:id="@+id/payment_Card"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="Debit Card"
+        android:layout_gravity="center_horizontal"
+        />
+    <LinearLayout
+        android:id="@+id/payment_Card_LL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        >
+        <EditText
+            android:id="@+id/payment_card_no"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Crd Number"
+            />
+        <EditText
+            android:id="@+id/payment_card_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Card Holder's Name"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <Spinner
+                android:id="@+id/payment_month_spin"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                />
+                <Spinner
+                    android:id="@+id/payment_year_spin"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+
+                    />
+            <EditText
+                android:id="@+id/payment_card_civ"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:hint="CIV"
+                android:inputType="number"
+                android:maxLength="3"
+                />
+        </LinearLayout>
+        <CheckBox
+            android:id="@+id/payment_save_card_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save Card information"
+            />
+        <Button
+            android:id="@+id/payment_card_proceed_btn"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="NEXT"
+            android:layout_gravity="center_horizontal"
+            />
+    </LinearLayout>
+    <Button
+        android:id="@+id/payment_paytm_btn"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="Paytm"
+        android:layout_gravity="center_horizontal"
+        />
+    <LinearLayout
+        android:id="@+id/payment_paytm_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        >
+        <EditText
+            android:id="@+id/payment_paytm_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Phone Number"
+            />
+        <Button
+            android:id="@+id/payment_paytm_proceed_btn"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="NEXT"
+            android:layout_gravity="center_horizontal"
+            />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/payment_back_btn"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:layout_gravity="center_horizontal"
+
+        />
+</LinearLayout>
+    <FrameLayout
+        android:id="@+id/payment_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+
+        />
+
+</FrameLayout>

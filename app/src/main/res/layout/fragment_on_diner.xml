@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    tools:context=".Activities.User.OnDinerFragment"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+       >
+
+        <ImageView
+            android:id="@+id/diner_img"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/diner_name_rest"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="About the Establishment"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/diner_img"
+            app:layout_constraintTop_toTopOf="@+id/diner_img" />
+
+        <TextView
+            android:id="@+id/diner_about_tv"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="@+id/diner_img"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView18"
+            app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+        <include
+            android:id="@+id/diner_include"
+            layout="@layout/table_and_item__include"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/diner_img"
+            app:layout_constraintTop_toBottomOf="@+id/diner_img" />
+
+        <Button
+            android:id="@+id/diner_order_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:text="Update Order"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/diner_include" />
+
+        <Button
+            android:id="@+id/diner_drinks_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Order Drinks"
+            app:layout_constraintStart_toStartOf="@+id/diner_order_btn"
+            app:layout_constraintTop_toBottomOf="@+id/diner_extras_btn" />
+
+        <Button
+            android:id="@+id/diner_done_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="Diner Done"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/diner_order_btn" />
+
+        <Button
+            android:id="@+id/diner_waiter_btn2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:text="Call Waiter"
+            app:layout_constraintStart_toStartOf="@+id/diner_order_btn"
+            app:layout_constraintTop_toBottomOf="@+id/diner_drinks_btn" />
+
+        <Button
+            android:id="@+id/diner_cleaner_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Call Cleaner"
+            app:layout_constraintStart_toStartOf="@+id/diner_order_btn"
+            app:layout_constraintTop_toBottomOf="@+id/diner_waiter_btn2" />
+
+        <Button
+            android:id="@+id/diner_extras_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Order Extras"
+            app:layout_constraintStart_toStartOf="@+id/diner_order_btn"
+            app:layout_constraintTop_toBottomOf="@+id/diner_order_btn" />
+
+        <TextView
+            android:id="@+id/diner_complaint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Complaint To Manager"
+            app:layout_constraintStart_toStartOf="@+id/diner_cleaner_btn"
+            app:layout_constraintTop_toBottomOf="@+id/diner_cleaner_btn" />
+
+        <TextView
+            android:id="@+id/diner_name_rest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Name Of Restaurant"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:id="@+id/diner_relLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        >
+        <TextView
+            android:id="@+id/diner_rl_tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="You are Not in a Restaurant!!"
+            android:textSize="16sp"
+            />
+        <Button
+            android:id="@+id/diner_rl_scan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="scan Now"
+            android:layout_below="@id/diner_rl_tv1"
+            android:layout_centerInParent="true"
+            />
+    </RelativeLayout>
+</FrameLayout>

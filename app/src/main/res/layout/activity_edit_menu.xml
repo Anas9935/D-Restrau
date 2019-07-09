@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.Manager.EditMenuActivity">
+    <ListView
+        android:id="@+id/edit_menu_Lv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/menu_todo"
+        >
+
+    </ListView>
+<Button
+    android:id="@+id/edit_menu_add_btn"
+    android:layout_width="50dp"
+    android:layout_height="50dp"
+    android:layout_gravity="bottom|end"
+    android:layout_margin="16dp"
+
+    />
+    <Button
+        android:id="@+id/edit_offer_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="offer on full menu"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="16dp"
+        />
+    <LinearLayout
+        android:id="@+id/edit_fullOffer_lv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="16dp"
+        android:visibility="invisible"
+        >
+        <EditText
+            android:id="@+id/edit_menu_offer"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:hint="Offer"
+            />
+        <Button
+            android:id="@+id/edit_menu_setBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="set"
+            />
+    </LinearLayout>
+
+</FrameLayout>

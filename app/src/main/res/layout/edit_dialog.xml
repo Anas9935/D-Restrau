@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:layout_marginTop="16dp"
+        android:textStyle="bold"
+        android:textColor="@color/darkBlue"
+        />
+    <EditText
+        android:id="@+id/edit_dialog_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Phone number"
+        android:layout_marginTop="16dp"
+        android:textStyle="bold"
+        android:textColor="@color/darkBlue"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+91"
+            />
+        <EditText
+            android:id="@+id/edit_dialog_ph1"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+91"
+            />
+        <EditText
+            android:id="@+id/edit_dialog_ph2"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Address"
+        android:layout_marginTop="16dp"
+        android:textStyle="bold"
+        android:textColor="@color/darkBlue"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edit_dialog_add1"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            />
+        <EditText
+            android:id="@+id/edit_dialog_add2"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pin Code"
+        android:layout_marginTop="16dp"
+        android:textStyle="bold"
+        android:textColor="@color/darkBlue"
+        />
+    <EditText
+        android:id="@+id/edit_dialog_pin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        />
+    <TextView
+        android:id="@+id/edit_dialog_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="This will only change your user id and not the details your manager has."
+        android:textColor="#FF0000"
+        android:visibility="gone"
+        />
+    <Button
+        android:id="@+id/edit_dialog_update"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="UPDATE"
+        android:background="@color/lightBlue"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
+        />
+
+
+</LinearLayout>

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/menuimg"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            tools:src="@tools:sample/backgrounds/scenic"
+            android:scaleType="fitXY"
+            android:paddingTop="16dp"
+            android:paddingStart="16dp"
+            android:paddingBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toEndOf="@+id/menuimg"
+            app:layout_constraintTop_toTopOf="@+id/menuimg">
+
+            <ImageView
+                android:id="@+id/menuveg"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="16dp"
+                tools:src="@drawable/veg" />
+
+            <TextView
+                android:id="@+id/menuname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingStart="8dp"
+                tools:text="Veg hariyali Roll" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/menuInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="24dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            app:layout_constraintStart_toEndOf="@+id/menuimg"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+            tools:text="Info Here \n dhvsfjhv" />
+
+        <RatingBar
+            android:id="@+id/menu_rating"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toEndOf="@+id/menuimg"
+            app:layout_constraintTop_toBottomOf="@+id/menuInfo" />
+
+        <TextView
+            android:id="@+id/textrs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="₹"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/menu_rating"
+            app:layout_constraintTop_toBottomOf="@+id/menu_rating" />
+
+        <TextView
+            android:id="@+id/menuprice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="8dp"
+            android:layout_toRightOf="@id/textrs"
+            android:text="500"
+            android:textColor="#000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/textrs"
+            app:layout_constraintTop_toBottomOf="@+id/menu_rating" />
+
+        <!--<Button-->
+            <!--android:id="@+id/menuadd"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginEnd="16dp"-->
+            <!--android:text="ADD"-->
+            <!--android:visibility="invisible"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/menu_rating"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="@+id/menuoffer"-->
+         <!--/>-->
+    <TextView
+        android:id="@+id/menuadd"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="ADD"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:gravity="center_horizontal"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/menu_rating"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/menuoffer"
+        android:background="@drawable/button_cover"
+        />
+
+    <LinearLayout
+        android:id="@+id/menuaddlayout"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/menuadd"
+        app:layout_constraintEnd_toEndOf="@+id/menuadd"
+        app:layout_constraintStart_toStartOf="@+id/menuadd"
+        app:layout_constraintTop_toTopOf="@+id/menuadd"
+        android:background="@drawable/button_cover"
+        android:visibility="invisible"
+        >
+        <TextView
+            android:id="@+id/menuaddminus"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="-"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/menuqty"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="1"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:textColor="@color/myColorPrimaryDark"
+            />
+
+        <TextView
+            android:id="@+id/menuaddplus"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="+"
+            android:textSize="14sp" />
+
+
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/menuoffer"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_weight="1"
+        android:text="offerHere"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/menuimg"
+        android:textColor="@color/myColorPrimaryDark"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/menuimg"
+        tools:layout_editor_absoluteX="120dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_general_home"
+        android:title="Home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:enabled="true"
+        />
+    <!--<item-->
+        <!--android:id="@+id/action_general_new_restrau"-->
+        <!--android:title="Register Your Restaurant"-->
+        <!--/>-->
+    <item
+        android:id="@+id/action_general_profile"
+        android:title="Profile"
+        android:icon="@drawable/profile"
+        />
+    <item
+        android:id="@+id/action_general_search"
+        android:title="Search"
+        android:icon="@drawable/ic_search_black_24dp"
+        />
+    <item
+        android:id="@+id/action_general_PastOrder"
+        android:title="My Orders"
+        android:icon="@drawable/ic_shopping_cart_black_24dp"
+        />
+    <item
+        android:id="@+id/action_general_dinner"
+        android:title="Diner"
+        android:icon="@drawable/waiter_icon"
+        />
+</menu>

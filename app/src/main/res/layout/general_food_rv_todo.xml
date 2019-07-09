@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="130dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_height="130dp"
+    android:background="@drawable/back_for_text_dark">
+    <ImageView
+        android:id="@+id/general_food_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:src="@tools:sample/backgrounds/scenic"
+        android:scaleType="fitXY"
+        android:background="@drawable/food_corners_bk"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="bottom"
+        >
+
+        <TextView
+            android:id="@+id/general_food_offer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:text="20% off"
+            android:textStyle="bold"
+            android:textColor="#000"
+            />
+        <TextView
+            android:id="@+id/general_food_hotel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hotel Name"
+            android:textColor="#000"
+            android:textSize="12sp"
+            android:ellipsize="end"
+            />
+    </LinearLayout>
+
+</FrameLayout>
