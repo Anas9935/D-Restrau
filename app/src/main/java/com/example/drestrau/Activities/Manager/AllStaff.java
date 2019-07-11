@@ -19,7 +19,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.drestrau.Activities.Authentication.Register;
-import com.example.drestrau.Activities.User.ProfileActivity;
 import com.example.drestrau.Adapters.AdapterForNewStaff;
 import com.example.drestrau.Adapters.allStaffAdapter;
 import com.example.drestrau.Objects.staffForListObject;
@@ -64,10 +63,11 @@ DatabaseReference staffRef;
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent=new Intent(AllStaff.this, ProfileActivity.class);     //opening the profile of the staff
-                intent.putExtra("rid",rid);
-                intent.putExtra("staffId",list.get(position).getStaffId());
-                startActivity(intent);
+                //new profile Activity for manager has to be made
+              //  Intent intent=new Intent(AllStaff.this, ProfileActivity.class);     //opening the profile of the staff
+               // intent.putExtra("rid",rid);
+                //intent.putExtra("staffId",list.get(position).getStaffId());
+                //startActivity(intent);
             }
 
         });

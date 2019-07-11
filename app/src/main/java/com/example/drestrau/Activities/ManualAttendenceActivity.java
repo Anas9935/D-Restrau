@@ -64,7 +64,7 @@ allStaffAdapter adapter;
                                 obj.setPayDue(1);
                             }
                             obj.setAttendenceToday(1);
-                            FirebaseDatabase.getInstance().getReference("attendance").child(rid).child(object.getStaffUid()).setValue(obj);
+                            FirebaseDatabase.getInstance().getReference("attendance").child(rid).child(object.getStaffId()).setValue(obj);
                             Toast.makeText(ManualAttendenceActivity.this, "Attendance done", Toast.LENGTH_SHORT).show();
                         }
                         }else{Toast.makeText(ManualAttendenceActivity.this,"Attendance Already Done",Toast.LENGTH_SHORT).show();}

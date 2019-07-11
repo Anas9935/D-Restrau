@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,12 +23,15 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.example.drestrau.Adapters.RecepAdapter;
 import com.example.drestrau.Objects.RecepObject;
+import com.example.drestrau.Objects.RestObject;
 import com.example.drestrau.Objects.attendanceObject;
 import com.example.drestrau.Objects.paymentObject;
 import com.example.drestrau.Objects.pres_rest;
 import com.example.drestrau.Objects.selectionForChefObject;
+import com.example.drestrau.Objects.staffObject;
 import com.example.drestrau.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -46,27 +50,27 @@ import com.google.zxing.integration.android.IntentResult;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import static android.graphics.Color.BLACK;
 import static android.graphics.Color.WHITE;
 
 public class ReceptionistActivity extends AppCompatActivity {
-String rid;
+String rid,uid,staffId;
 ListView lv;
 FloatingActionButton fab,scanAtt,newRes;
 //TextView seatNumber;
 int seats;
 int tableSel;
-String  restNameString;
 RecepAdapter adapter;
 ArrayList<RecepObject> list;
 
 IntentIntegrator qrcode;
+
+TextView ProfileName,ProfileViewBtn;
+    RelativeLayout item1,item2;
+    ImageView profileImg;
     private String TAG="Recep";
-    private int WIDTH=300;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,14 +78,14 @@ IntentIntegrator qrcode;
         setContentView(R.layout.activity_receptionist);
 
         rid=getIntent().getStringExtra("rid");
+        uid=FirebaseAuth.getInstance().getUid();
         initialiseViews();
 
         list=new ArrayList<>();
         adapter=new RecepAdapter(this,list);
         lv.setAdapter(adapter);
         getList();
-        getRestNameAndSeats();
-       // getSeats();
+
 
         qrcode=new IntentIntegrator(this);
 
@@ -97,40 +101,17 @@ IntentIntegrator qrcode;
 
             }
         });
-
+        populateDrawer();
     }
-    private void getRestNameAndSeats() {
-        FirebaseDatabase.getInstance().getReference("restaurants").child(rid).addChildEventListener(new ChildEventListener() {
+    private void getRestNameAndSeats(final TextView tv) {
+        FirebaseDatabase.getInstance().getReference("restaurants").child(rid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-               switch (dataSnapshot.getKey()){
-                   case "name":{
-                       restNameString=dataSnapshot.getValue(String.class);
-                       break;
-                   }
-                   case "seats":{
-                       Integer seat=dataSnapshot.getValue(Integer.class);
-                       if(seat!=null){
-                           seats=seat;
-                       }
-                       break;
-                   }
-               }
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                RestObject obj=dataSnapshot.getValue(RestObject.class);
+                if(obj!=null){
+                    tv.setText(obj.getName());
+                    //seats
+                }
             }
 
             @Override
@@ -138,6 +119,8 @@ IntentIntegrator qrcode;
 
             }
         });
+
+
     }
 
     private void initialiseViews(){
@@ -145,6 +128,12 @@ IntentIntegrator qrcode;
         fab=findViewById(R.id.recep_fab);
         scanAtt=findViewById(R.id.recep_scan_atten);
         newRes=findViewById(R.id.recep_newRes);
+
+        //for the drawer
+        ProfileName=findViewById(R.id.userName);
+        ProfileViewBtn=findViewById(R.id.desc);
+        item1=findViewById(R.id.simple_staffRVItem1);
+        item2=findViewById(R.id.simple_staffRVItem2);
     }
     private void getList(){
         FirebaseDatabase.getInstance().getReference("payments").child(rid).addChildEventListener(new ChildEventListener() {
@@ -199,6 +188,7 @@ IntentIntegrator qrcode;
                         long dateObj=obj.getInt("date");
                         int timeObj=obj.getInt("time");
                         if (ridObj.equals(rid)){
+                            //preparing views
 
                             Toast.makeText(this,"Restaurant Id Matched",Toast.LENGTH_SHORT).show();
                             popupDialog(uidObj,ridObj,selKeyObj,payKey,dateObj,timeObj);
@@ -220,8 +210,7 @@ IntentIntegrator qrcode;
 
     }
 
-    private void updateAttendance(final String sid)
-    {
+    private void updateAttendance(final String sid) {
         FirebaseDatabase.getInstance().getReference("attendance").child(rid).child(sid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -267,9 +256,10 @@ IntentIntegrator qrcode;
         setupTableSpinner(tabSel);
         setName(name,ud);
         //matching the rd and rid
-       restName.setText(restNameString);
-     //   setRestName(restName,rd);
-        dt.setText(getDate(date));
+        //
+        getRestNameAndSeats(restName);
+
+        dt.setText(utilityClass.getDate(date));
         String[] times=getResources().getStringArray(R.array.timeSlot);
         tm.setText(times[time]);
         //update the list
@@ -294,7 +284,6 @@ IntentIntegrator qrcode;
         }).setNegativeButton("Cancel",null);
         builder.create().show();
     }
-
     private void setupTableSpinner(Spinner tabSel) {
         Integer[] tables=new Integer[seats];
         for(int i=0;i<seats;i++){
@@ -365,8 +354,9 @@ IntentIntegrator qrcode;
         private Bitmap encodeAsBitmap(String json) throws WriterException {
         BitMatrix result;
         try{
+            int WIDTH = 300;
             result=new MultiFormatWriter().encode(json
-                    , BarcodeFormat.QR_CODE,WIDTH,WIDTH,null);
+                    , BarcodeFormat.QR_CODE, WIDTH, WIDTH,null);
         } catch (IllegalArgumentException iae) {
             // Unsupported format
             return null;
@@ -403,12 +393,6 @@ IntentIntegrator qrcode;
         });
     }
 
-    private String getDate(long timeS){
-        SimpleDateFormat format=new SimpleDateFormat("dd-mm-yyyy");
-        return format.format(new Date(timeS*1000));
-    }
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_recep,menu);
@@ -434,4 +418,88 @@ IntentIntegrator qrcode;
             }
         }
     }
+
+    private void populateDrawer(){
+
+        FirebaseDatabase.getInstance().getReference("users").child(uid).child("name").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String nm=dataSnapshot.getValue(String.class);
+                if(nm!=null){
+                    ProfileName.setText(nm);
+                }else{
+                    ProfileName.setText("NAME");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        FirebaseDatabase.getInstance().getReference("staffs").child(rid).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                staffObject obj=dataSnapshot.getValue(staffObject.class);
+                if(obj!=null&&obj.getUid().equals(uid)&&obj.getPicUrl()!=null){
+                    Glide.with(ReceptionistActivity.this)
+                            .load(obj.getPicUrl())
+                            .into(profileImg);
+                    //here we take image url and staff id
+                    staffId=dataSnapshot.getKey();
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        ProfileViewBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //show the profile of the worker
+                Intent intent=new Intent(ReceptionistActivity.this, ProfileActivity.class);
+                intent.putExtra("isStaff",1);
+                intent.putExtra("rid",rid);
+                startActivity(intent);
+
+            }
+        });
+        item1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(staffId!=null) {
+                    Intent intent = new Intent(ReceptionistActivity.this, QrCodeActivity.class);
+                    intent.putExtra("rid", rid);
+                    intent.putExtra("staffId",staffId );
+                    startActivity(intent);
+                }
+            }
+        });
+        item2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                finish();
+            }
+        });
+    }
+
 }

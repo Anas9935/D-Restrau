@@ -1,58 +1,41 @@
 package com.example.drestrau.Activities.Manager;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.bumptech.glide.Glide;
-import com.example.drestrau.Activities.Authentication.Register;
-import com.example.drestrau.Adapters.AdapterForNewStaff;
-import com.example.drestrau.Objects.users;
+import com.example.drestrau.Activities.ProfileActivity;
+import com.example.drestrau.Activities.QrCodeActivity;
+import com.example.drestrau.Objects.staffObject;
 import com.example.drestrau.R;
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-
-import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
+import com.google.firebase.database.ValueEventListener;
 
 public class ManagerActivity extends AppCompatActivity {
     String rid,uid;
     ConstraintLayout viewStaff,payment,food;
     ImageView spec1,spec2,spec3;
-    TextView name1,name2,name3;
+    TextView name1,name2,name3,ProfileName,ProfileViewBtn;;
+    RelativeLayout item1,item2;
+    ImageView profileImg;
+    String staffId;
+
 
 
 DatabaseReference staffRef;
@@ -91,6 +74,7 @@ DatabaseReference staffRef;
                 startActivity(intent);
             }
         });
+        populateDrawer();
 
     }
 
@@ -104,6 +88,13 @@ DatabaseReference staffRef;
         name1=findViewById(R.id.manager_specName1);
         name2=findViewById(R.id.manager_specName2);
         name3=findViewById(R.id.manager_specName3);
+
+        //for the drawer
+        ProfileName=findViewById(R.id.userName);
+        ProfileViewBtn=findViewById(R.id.desc);
+        item1=findViewById(R.id.simple_staffRVItem1);
+        item2=findViewById(R.id.simple_staffRVItem2);
+        profileImg=findViewById(R.id.avatar);
     }
     private void setSpeciality(){
 
@@ -234,6 +225,121 @@ DatabaseReference staffRef;
         });
     }
 
+
+    private void populateDrawer(){
+
+        FirebaseDatabase.getInstance().getReference("users").child(uid).child("name").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String nm=dataSnapshot.getValue(String.class);
+                if(nm!=null){
+                    ProfileName.setText(nm);
+                }else{
+                    ProfileName.setText("NAME");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        /*
+        FirebaseDatabase.getInstance().getReference("staffs").child(rid).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                staffObject obj=dataSnapshot.getValue(staffObject.class);
+                if(obj!=null&&obj.getUid().equals(uid)&&obj.getPicUrl()!=null){
+                    Glide.with(ManagerActivity.this)
+                            .load(obj.getPicUrl())
+                            .into(profileImg);
+                    //here we take image url and staff id
+                    staffId=dataSnapshot.getKey();
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+*/
+        ProfileViewBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //show the profile of the worker
+                getSidAndContinue();
+
+            }
+        });
+        item1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(staffId!=null) {
+                    Intent intent = new Intent(ManagerActivity.this, QrCodeActivity.class);
+                    intent.putExtra("rid", rid);
+                    intent.putExtra("staffId",staffId );
+                    startActivity(intent);
+                }
+            }
+        });
+        item2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                finish();
+            }
+        });
+    }
+    private void getSidAndContinue() {
+        FirebaseDatabase.getInstance().getReference("staffs").child(rid).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                staffObject obj=dataSnapshot.getValue(staffObject.class);
+                if(obj!=null&&obj.getUid().equals(uid)){
+                    Intent intent=new Intent(ManagerActivity.this, ProfileActivity.class);
+                    intent.putExtra("isStaff",1);
+                    intent.putExtra("rid",rid);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

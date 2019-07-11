@@ -40,10 +40,10 @@
         <activity
             android:name=".Activities.ChefActivity"
             android:theme="@style/myThemeWithAction" />
-        <activity android:name=".Activities.Manager.EditMenuActivity" />
-        <activity android:name=".Activities.User.ProfileActivity"
-            android:theme="@style/Mytheme"
+        <activity android:name=".Activities.ProfileActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             />
+        <activity android:name=".Activities.Manager.EditMenuActivity" />
         <activity android:name=".Activities.Manager.AllStaff" />
         <activity android:name=".Activities.User.addRestrau" />
         <activity android:name=".TestingActivity" />

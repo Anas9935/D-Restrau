@@ -1,15 +1,14 @@
 package com.example.drestrau.Activities.User;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+
+import com.example.drestrau.Activities.ProfileActivity;
 import com.example.drestrau.R;
 
 import com.example.drestrau.TestingActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.FirebaseAuth;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -41,7 +40,7 @@ public class GeneralUserNew extends AppCompatActivity {
                     break;
                 }
                 case R.id.action_general_profile:{
-                    Intent intent=new Intent(GeneralUserNew.this,ProfileActivity.class);
+                    Intent intent=new Intent(GeneralUserNew.this, ProfileActivity.class);
                     startActivity(intent);
                     return true;
                 }

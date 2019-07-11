@@ -20,7 +20,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.bumptech.glide.Glide;
-import com.example.drestrau.Activities.User.ProfileActivity;
 import com.example.drestrau.Adapters.MessageAdapter;
 import com.example.drestrau.Objects.menuObject;
 import com.example.drestrau.Objects.messageObject;
@@ -35,10 +34,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 
 public class SimpleStaffActivity extends AppCompatActivity {
 String rid,uid,mangrId;
@@ -426,7 +423,11 @@ ConstraintLayout cl;
             @Override
             public void onClick(View v) {
                 //show the profile of the worker
-            getSidAndContinue();
+                Intent intent=new Intent(SimpleStaffActivity.this, ProfileActivity.class);
+                intent.putExtra("isStaff",1);
+                intent.putExtra("rid",rid);
+                startActivity(intent);
+        //    getSidAndContinue();
 
             }
         });
@@ -436,7 +437,7 @@ ConstraintLayout cl;
                 if(staffId!=null) {
                     Intent intent = new Intent(SimpleStaffActivity.this, QrCodeActivity.class);
                     intent.putExtra("rid", rid);
-                    intent.putExtra("staffId",staffId );
+                    intent.putExtra("isStaff",1);
                     startActivity(intent);
                 }
             }
@@ -450,40 +451,5 @@ ConstraintLayout cl;
         });
     }
 
-    private void getSidAndContinue() {
-        FirebaseDatabase.getInstance().getReference("staffs").child(rid).addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                staffObject obj=dataSnapshot.getValue(staffObject.class);
-                if(obj!=null&&obj.getUid().equals(uid)){
-                    Intent intent=new Intent(SimpleStaffActivity.this,ProfileActivity.class);
-                    intent.putExtra("sid",obj.getSid());
-                    intent.putExtra("picUrl",obj.getPicUrl());
-                    intent.putExtra("salary",obj.getSalary());
-                    intent.putExtra("rid",rid);
-                    startActivity(intent);
-                }
-            }
 
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
 }
