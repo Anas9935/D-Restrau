@@ -293,7 +293,6 @@ ConstraintLayout cl;
         list=new ArrayList<>();
         adapter=new MessageAdapter(this,list,uid);
         message.setAdapter(adapter);
-             //accorfdintg to the designamtion of this man
 
 
         if(true){       //waiter
@@ -304,15 +303,12 @@ ConstraintLayout cl;
                     adapter.add(obj);
                     Collections.sort(list,new messsageSortingComp());
                 }
-
                 @Override
                 public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
                 }
 
                 @Override
                 public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
                 }
 
                 @Override
