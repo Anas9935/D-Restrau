@@ -50,7 +50,7 @@ public class addRestrau extends AppCompatActivity {
     private static final int PICK_IMAGE_FROM_GALLERY =151 ;
     private static final String TAG ="add Restaurant" ;
     String manId;
-EditText name,managerId,add1,add2,add3,pin,con,email,nos,open,close;
+EditText name,managerId,add1,add2,add3,pin,con,email,nos2,nos4,nos6,open,close;
 TextView idStatus;
 RadioButton  yes,no;
 ImageView imgOfRest,cam;
@@ -83,7 +83,29 @@ LinearLayout managerLayout;
             }
         });
     }
+    private void initialiseView(){
+        name=findViewById(R.id.newrest_name);
+        managerId=findViewById(R.id.newrest_userId);
+        add1=findViewById(R.id.newrest_add1);
+        add2=findViewById(R.id.newrest_add2);
+        add3=findViewById(R.id.newrest_add3);
+        pin=findViewById(R.id.newrest_pincode);
+        con=findViewById(R.id.newrest_contact);
+        email=findViewById(R.id.newrest_qEmail);
+        nos2=findViewById(R.id.newrest_no2Seats);
+        nos4=findViewById(R.id.newrest_no4Seats);
+        nos6=findViewById(R.id.newrest_no6Seats);
+        open=findViewById(R.id.newrest_openTime);
+        close=findViewById(R.id.newrest_closeTime);
+        yes=findViewById(R.id.newrest_yesRadio);
+        no=findViewById(R.id.newrest_noRadio);
+        imgOfRest=findViewById(R.id.newrest_pic);
+        payBtn=findViewById(R.id.newrest_pay_btn);
+        idStatus=findViewById(R.id.newrest_statusId);
+        cam=findViewById(R.id.newrest_camera);
+        managerLayout=findViewById(R.id.add_rest_manager_layout);
 
+    }
     private void pickImage() {
         AlertDialog.Builder builder=new AlertDialog.Builder(addRestrau.this);
         View view= LayoutInflater.from(addRestrau.this).inflate(R.layout.image_choose_dialog,null);
@@ -214,27 +236,7 @@ LinearLayout managerLayout;
         });
         return useris[0];
     }
-    private void initialiseView(){
-        name=findViewById(R.id.newrest_name);
-        managerId=findViewById(R.id.newrest_userId);
-        add1=findViewById(R.id.newrest_add1);
-        add2=findViewById(R.id.newrest_add2);
-        add3=findViewById(R.id.newrest_add3);
-        pin=findViewById(R.id.newrest_pincode);
-        con=findViewById(R.id.newrest_contact);
-        email=findViewById(R.id.newrest_qEmail);
-        nos=findViewById(R.id.newrest_noSeats);
-        open=findViewById(R.id.newrest_openTime);
-        close=findViewById(R.id.newrest_closeTime);
-        yes=findViewById(R.id.newrest_yesRadio);
-        no=findViewById(R.id.newrest_noRadio);
-        imgOfRest=findViewById(R.id.newrest_pic);
-        payBtn=findViewById(R.id.newrest_pay_btn);
-        idStatus=findViewById(R.id.newrest_statusId);
-        cam=findViewById(R.id.newrest_camera);
-        managerLayout=findViewById(R.id.add_rest_manager_layout);
 
-    }
    private void save(){
         if(isApproved){
             String nm=name.getText().toString();
@@ -245,11 +247,13 @@ LinearLayout managerLayout;
             long pincode=Long.parseLong(pin.getText().toString());
             long contact=Long.parseLong(con.getText().toString());
             String mail=email.getText().toString();
-            int noseat=Integer.parseInt(nos.getText().toString());
+            int no2seat=Integer.parseInt(nos2.getText().toString());
+            int no4seat=Integer.parseInt(nos4.getText().toString());
+            int no6seat=Integer.parseInt(nos6.getText().toString());
             int op=Integer.parseInt(open.getText().toString());
             int cl=Integer.parseInt(close.getText().toString());
 
-            RestObject object=new RestObject(nm,manId,a1,a2,a3,pincode,0,contact,noseat,op,cl,mail);
+            RestObject object=new RestObject(nm,manId,a1,a2,a3,pincode,0,contact,no2seat,no4seat,no6seat,op,cl,mail);
             String key=FirebaseDatabase.getInstance().getReference("restaurants").push().getKey();
             object.setRid(key);
             if(key!=null) {
@@ -297,6 +301,7 @@ LinearLayout managerLayout;
                                 object.setPivtureUrl(downUri.toString());
                                 FirebaseDatabase.getInstance().getReference("restaurants").child(object.getRid()).setValue(object);
                                 Log.e("Final URL", "onComplete: Url: " + downUri.toString());
+                                Toast.makeText(addRestrau.this,"New Restaurant is added",Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -312,6 +317,7 @@ LinearLayout managerLayout;
         }
         FirebaseDatabase.getInstance().getReference("restaurants").child(object.getRid()).setValue(object);
         Toast.makeText(addRestrau.this,"New Restaurant is added",Toast.LENGTH_SHORT).show();
+        finish();
 
     }
 

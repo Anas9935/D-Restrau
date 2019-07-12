@@ -1,23 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".Activities.ProfileActivity"
-    tools:showIn="@layout/activity_profile">
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    >
+
+
 
     <LinearLayout
-        android:layout_width="360dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_gravity="center"
-        android:layout_marginBottom="45dp"
+        android:background="@color/myColorPrimaryLight"
+        >
+
+        <TextView
+            android:id="@+id/profile_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:layout_gravity="center_horizontal|bottom"
+            android:textSize="20sp"
+            android:layout_marginTop="32dp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+        <View
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="30dp"/>
+            <TextView
+                android:id="@+id/profile_edit_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EDIT"
+                android:layout_marginEnd="16dp"
+                android:textStyle="bold"
+                android:textColor="@color/myColorAccent"
+                android:layout_gravity="bottom"
+                android:textSize="16sp"
+                />
+        </LinearLayout>
+    </LinearLayout>
+    <!--<include-->
+        <!--layout="@layout/content_scrolling"-->
+        <!--/>-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         >
         <LinearLayout
             android:orientation="horizontal"
-            android:paddingLeft="25dp"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
@@ -37,7 +84,6 @@
         <LinearLayout
             android:layout_marginTop="25dp"
             android:orientation="horizontal"
-            android:paddingLeft="25dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
@@ -45,26 +91,42 @@
                 android:layout_height="36dp"
                 app:srcCompat="@drawable/ic_call_black_24dp"/>
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+91 "
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:layout_marginStart="20dp"
+                />
+            <TextView
                 android:id="@+id/profile_ph1"
                 android:textStyle="bold"
                 android:layout_gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="6625142154"/>
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="20dp"
-                android:text="+266 225 225"/>
+                android:text="+91 "
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:layout_marginStart="20dp"
+                />
             <TextView
                 android:id="@+id/profile_ph2"
                 android:textStyle="bold"
                 android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="20dp"
-                android:text="+266 225 225"/>
+                android:text="52456 225 225"
+                android:layout_marginEnd="16dp"
+                />
         </LinearLayout>
         <LinearLayout
             android:layout_marginTop="25dp"
             android:orientation="horizontal"
-            android:paddingLeft="25dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
@@ -91,7 +153,6 @@
         <LinearLayout
             android:layout_marginTop="25dp"
             android:orientation="horizontal"
-            android:paddingLeft="25dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
@@ -110,7 +171,6 @@
         <LinearLayout
             android:layout_marginTop="25dp"
             android:orientation="horizontal"
-            android:paddingLeft="25dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
@@ -135,5 +195,7 @@
             />
 
     </LinearLayout>
+    </RelativeLayout>
 
-</androidx.core.widget.NestedScrollView>
+</LinearLayout>
+

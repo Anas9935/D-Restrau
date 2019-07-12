@@ -75,9 +75,9 @@
         <View
             android:id="@+id/general_space1"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:layout_below="@id/general_fl"
-            android:background="#8B8B8B"
+            android:background="@color/myColorPrimaryLight"
             />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/general_Rv1"
@@ -85,6 +85,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_below="@id/general_space1"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
             />
         <ListView
             android:id="@+id/general_res_list"

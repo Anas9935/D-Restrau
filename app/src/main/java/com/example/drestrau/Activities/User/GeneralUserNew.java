@@ -34,16 +34,13 @@ public class GeneralUserNew extends AppCompatActivity {
                     break;
                 }
                 case R.id.action_general_search:{
-                    Intent intent=new Intent(GeneralUserNew.this,TestingActivity.class);
-                    startActivity(intent);
                     selectedFragment=new GeneralSearchFragment();
                     break;
                 }
                 case R.id.action_general_profile:{
-                    Intent intent=new Intent(GeneralUserNew.this, ProfileActivity.class);
-                    startActivity(intent);
-                    return true;
-                }
+                   selectedFragment=new profileFragment();
+                   break;
+                 }
                 case R.id.action_general_dinner:{
                     selectedFragment=new OnDinerFragment();
                     break;

@@ -294,7 +294,6 @@ ConstraintLayout cl;
         adapter=new MessageAdapter(this,list,uid);
         message.setAdapter(adapter);
 
-
         if(true){       //waiter
             FirebaseDatabase.getInstance().getReference("messages").child(uid).addChildEventListener(new ChildEventListener() {
                 @Override
@@ -433,7 +432,7 @@ ConstraintLayout cl;
                 if(staffId!=null) {
                     Intent intent = new Intent(SimpleStaffActivity.this, QrCodeActivity.class);
                     intent.putExtra("rid", rid);
-                    intent.putExtra("isStaff",1);
+                    intent.putExtra("staffId",staffId);
                     startActivity(intent);
                 }
             }

@@ -7,6 +7,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -45,7 +47,6 @@ String rid;
 DatabaseReference staffRef;
     ArrayList<users> listForNewStaff;
     AdapterForNewStaff adapterForNewStaff;
-    boolean isAllowed=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,24 +65,17 @@ DatabaseReference staffRef;
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //new profile Activity for manager has to be made
-              //  Intent intent=new Intent(AllStaff.this, ProfileActivity.class);     //opening the profile of the staff
-               // intent.putExtra("rid",rid);
-                //intent.putExtra("staffId",list.get(position).getStaffId());
-                //startActivity(intent);
+                Intent intent=new Intent(AllStaff.this, ManagerProfileActivity.class);     //opening the profile of the staff
+                intent.putExtra("rid",rid);
+                intent.putExtra("staffId",list.get(position).getStaffId());
+                startActivity(intent);
             }
 
         });
-        addstaff.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(isAllowed)
-                    showDialog();
-            }
-        });
+
     }
     private void initialiseViews(){
         lv=findViewById(R.id.all_staff_listview);
-        addstaff=findViewById(R.id.all_staff_fab);
     }
     private void getListItems(){
         FirebaseDatabase.getInstance().getReference("staffs").child(rid).addChildEventListener(new ChildEventListener() {
@@ -91,7 +85,7 @@ DatabaseReference staffRef;
                 String name=object.getName1()+" "+object.getName2()+" "+object.getName3();
                 staffForListObject staff=new staffForListObject(name,null,object.getSid(),object.getUid(),object.getContact1(),object.getDesignation());
                 staff.setPicUrl(object.getPicUrl());
-               getPaydue(staff);
+                getPaydue(staff);
                 //getPPURL(object.getUid(),staff);
             }
 
@@ -179,8 +173,6 @@ DatabaseReference staffRef;
             }
         });
 
-
-
         newId.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -246,7 +238,8 @@ DatabaseReference staffRef;
         });
         builder.create().show();
 
-    }private void getAlertforExit() {
+    }
+    private void getAlertforExit() {
         AlertDialog.Builder newid=new AlertDialog.Builder(AllStaff.this);
         newid.setTitle("Log out").setMessage("This Id will be Logged out. Are you sure you want to Continue?").setPositiveButton("Continue", new DialogInterface.OnClickListener() {
             @Override
@@ -297,5 +290,20 @@ DatabaseReference staffRef;
 
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.manager_all_staff,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId()==R.id.action_manager_all_staff_add_btn){
+                showDialog();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

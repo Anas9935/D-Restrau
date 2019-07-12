@@ -88,7 +88,12 @@ TextView ProfileName,ProfileViewBtn;
 
 
         qrcode=new IntentIntegrator(this);
-
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //disable the background
+            }
+        });
         scanAtt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,6 +106,7 @@ TextView ProfileName,ProfileViewBtn;
 
             }
         });
+
         populateDrawer();
     }
     private void getRestNameAndSeats(final TextView tv) {

@@ -131,13 +131,39 @@
             android:hint="Query Email"
             android:textColorHint="@color/myColorAccent"
             />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
     <EditText
-        android:id="@+id/newrest_noSeats"
-        android:layout_width="match_parent"
+        android:id="@+id/newrest_no2Seats"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:hint="Number of seats"
+        android:hint="2 Seaters"
         android:textColorHint="@color/myColorAccent"
+        android:inputType="number"
         />
+        <EditText
+                android:id="@+id/newrest_no4Seats"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:hint="4 seaters"
+                android:textColorHint="@color/myColorAccent"
+            android:inputType="number"
+            />
+            <EditText
+                android:id="@+id/newrest_no6Seats"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:hint="6 seaters"
+                android:textColorHint="@color/myColorAccent"
+                android:inputType="number"
+                />
+        </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

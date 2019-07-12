@@ -244,46 +244,12 @@ DatabaseReference staffRef;
 
             }
         });
-        /*
-        FirebaseDatabase.getInstance().getReference("staffs").child(rid).addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                staffObject obj=dataSnapshot.getValue(staffObject.class);
-                if(obj!=null&&obj.getUid().equals(uid)&&obj.getPicUrl()!=null){
-                    Glide.with(ManagerActivity.this)
-                            .load(obj.getPicUrl())
-                            .into(profileImg);
-                    //here we take image url and staff id
-                    staffId=dataSnapshot.getKey();
-                }
-            }
 
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-*/
         ProfileViewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //show the profile of the worker
-                getSidAndContinue();
+                Intent intent=new Intent(ManagerActivity.this, ProfileActivity.class);
+                startActivity(intent);
 
             }
         });
@@ -306,60 +272,6 @@ DatabaseReference staffRef;
             }
         });
     }
-    private void getSidAndContinue() {
-        FirebaseDatabase.getInstance().getReference("staffs").child(rid).addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                staffObject obj=dataSnapshot.getValue(staffObject.class);
-                if(obj!=null&&obj.getUid().equals(uid)){
-                    Intent intent=new Intent(ManagerActivity.this, ProfileActivity.class);
-                    intent.putExtra("isStaff",1);
-                    intent.putExtra("rid",rid);
-                    startActivity(intent);
-                }
-            }
 
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_manager,menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()){
-            case R.id.action_manager_log_out:{
-     //                   uploadImage();
-                    FirebaseAuth.getInstance().signOut();
-                finish();
-                return true;
-            }
-            default:{
-                return  super.onOptionsItemSelected(item);
-            }
-        }
-    }
 }
 

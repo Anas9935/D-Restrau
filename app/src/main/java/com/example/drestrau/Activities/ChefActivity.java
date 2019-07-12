@@ -35,61 +35,18 @@ ArrayList<selectionForChefObject> list;
         list=new ArrayList<>();
         adapter=new ChefAdapter(this,list,rid);
         lv.setAdapter(adapter);
-  //      createSwipeMenu();
         getListItems();
 
     }
-/*
-    private void createSwipeMenu() {
-        SwipeMenuCreator creator = new SwipeMenuCreator() {
 
-
-            @Override
-            public void create(SwipeMenu menu) {
-                // create "Call" item
-                SwipeMenuItem callItem = new SwipeMenuItem(
-                        getApplicationContext());
-                // set item background
-                callItem.setBackground(new ColorDrawable(Color.rgb(0xF9,
-                        0x3F, 0x25)));
-                // set item width
-                callItem.setWidth(170);
-                // set a icon
-              //  callItem.setIcon(R.drawable.ic_delete);
-                callItem.setTitle("Call");
-                callItem.setTitleSize(18);
-                callItem.setTitleColor(Color.WHITE);
-                // add to menu
-                menu.addMenuItem(callItem);
-            }
-        };
-
-// set creator
-        lv.setMenuCreator(creator);
-        lv.setSwipeDirection(SwipeMenuListView.DIRECTION_RIGHT);
-        lv.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
-                switch (index) {
-                    case 0:
-                        {callWaiter();
-                        break;
-                    }
-                }
-                // false : close the menu; true : not close the menu
-                return false;
-            }
-        });
-
-    }
-*/
     private void callWaiter() {
+
     }
 
     private void getListItems(){
         FirebaseDatabase.getInstance().getReference("selectionForChef").child(rid).addChildEventListener(new ChildEventListener() {
             @Override
-            public void onChildAdded( DataSnapshot dataSnapshot,  String s) {
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot,  String s) {
                 selectionForChefObject obj=dataSnapshot.getValue(selectionForChefObject.class);
                 adapter.add(obj);
             }

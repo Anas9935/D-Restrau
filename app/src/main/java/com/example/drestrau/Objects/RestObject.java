@@ -11,8 +11,11 @@ public class RestObject {
     private long pin;
     private float rating;
     private long phno;
-    private int seats;
-   // private int seatsOccupied;
+    private int seats2;
+    private int seats4;
+    private int seats6;
+
+    // private int seatsOccupied;
     private int opening;
     private int closing;
     private String pivtureUrl;
@@ -22,7 +25,7 @@ public class RestObject {
     private String spec3;
 
     public RestObject(){}
-    public RestObject(String nam,String mid,String a1,String a2,String a3,long pincode,float r,long phn,int seat,int open,int close,String mail)
+    public RestObject(String nam,String mid,String a1,String a2,String a3,long pincode,float r,long phn,int seat2,int seat4,int seat6,int open,int close,String mail)
     {
         name=nam;
       //  Rid=id;
@@ -32,13 +35,39 @@ public class RestObject {
         add3=a3;
         rating=r;
         phno=phn;
-        seats=seat;
+        seats2=seat2;
+        seats4=seat4;
+        seats6=seat6;
         opening=open;
         closing=close;
         pivtureUrl=null;
         email=mail;
         pin=pincode;
     //    seatsOccupied=0;
+    }
+
+    public int getSeats2() {
+        return seats2;
+    }
+
+    public int getSeats4() {
+        return seats4;
+    }
+
+    public int getSeats6() {
+        return seats6;
+    }
+
+    public void setSeats2(int seats2) {
+        this.seats2 = seats2;
+    }
+
+    public void setSeats4(int seats4) {
+        this.seats4 = seats4;
+    }
+
+    public void setSeats6(int seats6) {
+        this.seats6 = seats6;
     }
 
     public String getSpec1() {
@@ -110,10 +139,6 @@ public class RestObject {
     }
 
 
-    public int getSeats() {
-        return seats;
-    }
-
     public long getPhno() {
         return phno;
     }
@@ -166,9 +191,6 @@ public class RestObject {
         this.rating = rating;
     }
 
-    public void setSeats(int seats) {
-        this.seats = seats;
-    }
 
     public String getPivtureUrl() {
         return pivtureUrl;

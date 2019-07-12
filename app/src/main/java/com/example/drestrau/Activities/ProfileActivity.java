@@ -38,7 +38,7 @@ import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
 public class ProfileActivity extends AppCompatActivity {
-String uid,rid,staffId;
+    String uid,rid,staffId;
     TextView name,email,phno1,phno2,address1,address2,id,pin;
     Toolbar toolbar;
     ImageView img;

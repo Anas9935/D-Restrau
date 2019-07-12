@@ -22,6 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:appComponentFactory">
+        <activity android:name=".Activities.Manager.ManagerProfileActivity"></activity>
         <activity
             android:name=".Activities.User.GeneralUserNew"
             android:label="@string/title_activity_general_user_new" />
@@ -40,9 +41,9 @@
         <activity
             android:name=".Activities.ChefActivity"
             android:theme="@style/myThemeWithAction" />
-        <activity android:name=".Activities.ProfileActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            />
+        <activity
+            android:name=".Activities.ProfileActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activities.Manager.EditMenuActivity" />
         <activity android:name=".Activities.Manager.AllStaff" />
         <activity android:name=".Activities.User.addRestrau" />

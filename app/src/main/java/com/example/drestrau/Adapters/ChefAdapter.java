@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.drestrau.Activities.utilityClass;
 import com.example.drestrau.Objects.menuObject;
 import com.example.drestrau.Objects.quantatySelected;
 import com.example.drestrau.Objects.selectionForChefObject;
@@ -49,6 +50,8 @@ public class ChefAdapter extends ArrayAdapter<selectionForChefObject> {
         table.setText(String.valueOf(current.getTable()));
         quan.setText("");
         food.setText("");
+        utilityClass.populateTableObject(rid,current.getChoice(),food,quan);
+  /*
         String[] items=current.getChoice().split(" ");
         for (String item : items) {
             CharSequence quant = item.subSequence(item.indexOf("(") + 1, item.indexOf(")"));
@@ -59,11 +62,11 @@ public class ChefAdapter extends ArrayAdapter<selectionForChefObject> {
             appendFoodFromId(food,foods);
          //   Log.e("adapter chef", "getView: "+foods );
         }
-
+*/
 
         return view;
     }
-
+/*
     private void appendFoodFromId(final TextView text, final String foods) {
         FirebaseDatabase.getInstance().getReference("menus").child(rid).addChildEventListener(new ChildEventListener() {
             @Override
@@ -97,4 +100,5 @@ public class ChefAdapter extends ArrayAdapter<selectionForChefObject> {
             }
         });
     }
+*/
 }
