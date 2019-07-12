@@ -1,13 +1,27 @@
 package com.example.drestrau.Activities.Manager;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.Manifest;
+import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,21 +31,39 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.drestrau.Activities.User.Reservations;
+import com.example.drestrau.Activities.User.addRestrau;
 import com.example.drestrau.Activities.utilityClass;
+import com.example.drestrau.Objects.RestObject;
 import com.example.drestrau.Objects.staffObject;
 import com.example.drestrau.R;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.YearMonth;
 import java.util.Calendar;
 import java.util.Date;
 
 public class ManagerProfileActivity extends AppCompatActivity {
-String staffId,rid;
-ImageView img,datePicker;
+    private static final int CAMERA_REQUEST =1100 ;
+    private static final int PICK_IMAGE_FROM_GALLERY =1101 ;
+    String staffId,rid;
+ImageView img,datePicker,cam;
 TextView name,gender,age,doj,desig,address,pincode,con1,con2,email,sal,uid,sid,dob,edit,save;
 //for edit mode
 EditText fName,mName,lName,add1,add2,add3,pincodeEv,con1Ev,con2Ev,emailEv,salaryEv;
@@ -40,14 +72,16 @@ Spinner desigSpin;
 staffObject myData;
 LinearLayout normalMode,editMode;
 int desigInt=-1;
+long newDOB;
+Bitmap bitmapImage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manager_profile);
         staffId=getIntent().getStringExtra("staffId");
-        sid.setText(staffId);
         rid=getIntent().getStringExtra("rid");
         initializeViews();
+        sid.setText(staffId);
         getDetails();
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +116,7 @@ int desigInt=-1;
 //for edit mode
         edit=findViewById(R.id.man_profile_editBtn);
         save=findViewById(R.id.man_profile_saveBtn);
+        cam=findViewById(R.id.man_profile_cam);
          fName=findViewById(R.id.man_profile_fNameEv);
          mName=findViewById(R.id.man_profile_mNameEv);
          lName=findViewById(R.id.man_profile_lNameEv);
@@ -166,7 +201,9 @@ int desigInt=-1;
     private void editMode() {
         normalMode.setVisibility(View.GONE);
         editMode.setVisibility(View.VISIBLE);
+        cam.setVisibility(View.VISIBLE);
         setPreviousViews();
+
         setupViews();
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,7 +215,7 @@ int desigInt=-1;
 
     private void saveData() {
         String name1=fName.getText().toString();
-        String name2=fName.getText().toString();
+        String name2=mName.getText().toString();
         String name3=lName.getText().toString();
         String add1St=add1.getText().toString();
         String add2St=add2.getText().toString();
@@ -195,17 +232,27 @@ int desigInt=-1;
             gen=1;
         }
         int desg=desigInt;
-        staffObject newStaff=new staffObject(name1,name2,name3,gen,sal,,Long.parseLong(doj.getText().toString()),add1St,add2St,add3St,pinc,email,ph1,ph2,desg);
+        final staffObject newStaff=new staffObject(name1,name2,name3,gen,sal,newDOB,myData.getDoj(),add1St,add2St,add3St,pinc,email,ph1,ph2,desg);
         newStaff.setSid(staffId);
         newStaff.setRid(rid);
         newStaff.setUid(uid.getText().toString());
         newStaff.setPicUrl(myData.getPicUrl());
 
-        FirebaseDatabase.getInstance().getReference("staffs").child(rid).child(staffId).setValue(newStaff);
-        Toast.makeText(this, "Staff Data Updated", Toast.LENGTH_SHORT).show();
-        editMode.setVisibility(View.GONE);
-        normalMode.setVisibility(View.VISIBLE);
-        recreate();
+        FirebaseDatabase.getInstance().getReference("staffs").child(rid).child(staffId).setValue(newStaff).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Toast.makeText(ManagerProfileActivity.this, "Staff Data Updated", Toast.LENGTH_SHORT).show();
+                saveImageAndSave(newStaff);
+                editMode.setVisibility(View.GONE);
+                normalMode.setVisibility(View.VISIBLE);
+                cam.setVisibility(View.GONE);
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
+            }
+        });
+
+
     }
 
     private void setupViews() {
@@ -236,6 +283,41 @@ int desigInt=-1;
                 }
             }
         });
+
+        datePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar c = Calendar.getInstance();
+                int mYear = c.get(Calendar.YEAR);
+                int mMonth = c.get(Calendar.MONTH);
+                int mDay = c.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(ManagerProfileActivity.this,android.R.style.Theme_DeviceDefault_Dialog,
+                        new DatePickerDialog.OnDateSetListener() {
+
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                dob.setText(dayOfMonth + "-" + (monthOfYear+1) + "-" + year);
+                                try {
+                                    DateFormat date= new SimpleDateFormat("dd-MM-yyyy");
+                                    Date date1=date.parse(dob.getText().toString());
+                                    //date is wrong
+                                    Log.e("this", "onDateSet: "+date1.toString()+"  "+date1.getTime() );
+                                    newDOB=date1.getTime()/1000;
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }, mYear, mMonth, mDay);
+                datePickerDialog.show();
+            }
+        });
+        cam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pickImage();
+            }
+        });
     }
     private void setPreviousViews() {
         fName.setText(myData.getName1());
@@ -260,5 +342,145 @@ int desigInt=-1;
             female.setChecked(true);
         }
 
+        try {
+            DateFormat date= new SimpleDateFormat("dd/MM/yyyy");
+            Date date1=date.parse(dob.getText().toString());
+            newDOB=date1.getTime()/1000;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void pickImage() {
+        AlertDialog.Builder builder=new AlertDialog.Builder(ManagerProfileActivity.this);
+        View view= LayoutInflater.from(ManagerProfileActivity.this).inflate(R.layout.image_choose_dialog,null);
+        builder.setTitle("Choose the source");
+        builder.setView(view);
+        final AlertDialog dialog=builder.create();
+        ConstraintLayout cam,gal;
+        cam=view.findViewById(R.id.image_choose_camera);
+        gal=view.findViewById(R.id.image_choose_gallery);
+        cam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //permissions
+                String[] CAMERA_PERMISSION = {android.Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE};
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    requestPermissions(CAMERA_PERMISSION, 001);
+                }
+                //choose image from cam
+                else{
+                    Intent intent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(intent,CAMERA_REQUEST);
+
+                }
+                dialog.dismiss();
+            }
+        });
+        gal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //choose imaeg from gallery
+                Intent intent=new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent,"Select Picture"),PICK_IMAGE_FROM_GALLERY);
+                dialog.dismiss();
+            }
+        });
+        builder.setView(view);
+        dialog.show();
+    }
+    private void saveImageAndSave(final staffObject object) {
+        if(bitmapImage!=null)
+
+        {
+            FirebaseStorage storage=FirebaseStorage.getInstance();
+            final StorageReference storeRef=storage.getReference().child("rest_pics").child(object.getRid()+".jpg");
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bitmapImage.compress(Bitmap.CompressFormat.JPEG, 60, baos);
+            byte[] data = baos.toByteArray();
+
+            final UploadTask uploadTask = storeRef.putBytes(data);
+
+            uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                    uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                        @Override
+                        public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                            if (!task.isSuccessful()) {
+                                throw task.getException();
+                            }
+                            return storeRef.getDownloadUrl();
+                        }
+                    }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Uri> task) {
+                            if (task.isSuccessful()) {
+                                Uri downUri = task.getResult();
+                                object.setPicUrl(downUri.toString());
+                                FirebaseDatabase.getInstance().getReference("staffs").child(rid).child(staffId).child("picUrl").setValue(downUri.toString());
+                                Log.e("Final URL", "onComplete: Url: " + downUri.toString());
+
+                              //  Toast.makeText(ManagerProfileActivity.this,"New Restaurant is added",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.e("this", "onFailure: "+"failed" );
+                    Toast.makeText(ManagerProfileActivity.this, "Adding image Failed", Toast.LENGTH_SHORT).show();
+                }
+            });
+            return;
+        }
+        finish();
+
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case CAMERA_REQUEST:{
+                if(resultCode==RESULT_OK){
+                    if (data != null) {
+                        bitmapImage=(Bitmap)data.getExtras().get("data");
+                        img.setImageBitmap(bitmapImage);
+                    }
+                }
+                break;
+            }
+            case PICK_IMAGE_FROM_GALLERY:{
+                if(resultCode==RESULT_OK){
+                    if (data != null) {
+                        Uri uri = data.getData();
+
+                        try {
+                            bitmapImage = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
+                            // Log.d(TAG, String.valueOf(bitmap));
+                            img.setImageBitmap(bitmapImage);
+                            //post it  to server
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                break;
+            }
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode==001&&grantResults[0]== PackageManager.PERMISSION_GRANTED){
+            Intent intent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent,CAMERA_REQUEST);
+            //dialog.dismiss();
+        }
     }
 }

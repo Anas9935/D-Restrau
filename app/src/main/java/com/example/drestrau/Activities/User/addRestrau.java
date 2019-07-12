@@ -301,7 +301,7 @@ LinearLayout managerLayout;
                                 object.setPivtureUrl(downUri.toString());
                                 FirebaseDatabase.getInstance().getReference("restaurants").child(object.getRid()).setValue(object);
                                 Log.e("Final URL", "onComplete: Url: " + downUri.toString());
-                                Toast.makeText(addRestrau.this,"New Restaurant is added",Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(addRestrau.this,"Imag",Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -310,13 +310,13 @@ LinearLayout managerLayout;
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     Log.e(TAG, "onFailure: "+"failed" );
-                    Toast.makeText(addRestrau.this, "Adding staff Failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(addRestrau.this, "Saving image Failed", Toast.LENGTH_SHORT).show();
                 }
             });
             return;
         }
-        FirebaseDatabase.getInstance().getReference("restaurants").child(object.getRid()).setValue(object);
-        Toast.makeText(addRestrau.this,"New Restaurant is added",Toast.LENGTH_SHORT).show();
+      //  FirebaseDatabase.getInstance().getReference("restaurants").child(object.getRid()).setValue(object);
+       // Toast.makeText(addRestrau.this,"New Restaurant is added",Toast.LENGTH_SHORT).show();
         finish();
 
     }
