@@ -104,6 +104,9 @@ public class ProfileActivity extends AppCompatActivity {
         }else{
             register_rest.setVisibility(View.VISIBLE);
         }
+        if(isStaff==5){         //for manager
+            register_rest.setVisibility(View.INVISIBLE);
+        }
         getId();
 
 
@@ -196,7 +199,9 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
         dialog.show();
-
+        Intent intent=getIntent();
+        finish();
+        startActivity(intent);
     }
     private void getId(){
         FirebaseDatabase.getInstance().getReference("users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {

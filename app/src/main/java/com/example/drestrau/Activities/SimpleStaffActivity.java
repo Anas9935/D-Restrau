@@ -122,6 +122,7 @@ ConstraintLayout cl;
                 switch (dataSnapshot.getKey()){
                     case "manUid":{
                         String manId=dataSnapshot.getValue(String.class);
+                        mangrId=manId;
                         getMessages(manId);
                         break;
                     }

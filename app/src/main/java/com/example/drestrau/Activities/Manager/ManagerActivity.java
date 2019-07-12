@@ -249,6 +249,7 @@ DatabaseReference staffRef;
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(ManagerActivity.this, ProfileActivity.class);
+                intent.putExtra("isStaff",5);
                 startActivity(intent);
 
             }

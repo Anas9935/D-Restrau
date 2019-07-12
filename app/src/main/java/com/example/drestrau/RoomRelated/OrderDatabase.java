@@ -16,7 +16,7 @@ public abstract class OrderDatabase extends RoomDatabase {
         if(sInstance==null){
             synchronized (LOCK){
                 sInstance= Room.databaseBuilder(context.getApplicationContext(),OrderDatabase.class, DB_NAME)
-                        .allowMainThreadQueries()
+                        //.allowMainThreadQueries()
                         .build();
             }
         }

@@ -1,5 +1,6 @@
 package com.example.drestrau.Activities.User;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -39,18 +40,45 @@ public class GeneralMyOrdersFragment extends Fragment {
         rv=view.findViewById(R.id.my_order_fragment_rv);
         list=new ArrayList<>();
 
-
-
-        mInstance=OrderDatabase.getInstance(getContext());
-        List<MyOrderObject> lst=mInstance.objectDao().loadAllObjects();
-        list.addAll(lst);
-
-        rv.setHasFixedSize(true);
         adapter=new MyOrderAdapter(getContext(),list);
+//        Thread thread=new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                mInstance=OrderDatabase.getInstance(getContext());
+//                List<MyOrderObject> lst=mInstance.objectDao().loadAllObjects();
+//                list.addAll(lst);
+//                adapter.setList(list);
+//               // adapter.notifyDataSetChanged();
+//            }
+//        });
+//        thread.start();
+//
+//
+        myCustomAsync newasnc=new myCustomAsync();
+        newasnc.execute("String");
+        rv.setHasFixedSize(true);
+
         rv.setAdapter(adapter);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
 
 
         return view;
+    }
+    public class myCustomAsync extends AsyncTask<String,Void,String>{
+
+
+        @Override
+        protected String doInBackground(String... strings) {
+            mInstance=OrderDatabase.getInstance(getContext());
+                List<MyOrderObject> lst=mInstance.objectDao().loadAllObjects();
+                list.addAll(lst);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            adapter.notifyDataSetChanged();
+        }
     }
 }

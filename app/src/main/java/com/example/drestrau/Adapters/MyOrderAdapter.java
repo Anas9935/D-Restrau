@@ -270,4 +270,8 @@ public MyOrderAdapter(Context context, ArrayList<MyOrderObject> ls){
     public int getItemCount() {
         return list.size();
     }
+    public void setList(ArrayList<MyOrderObject> ls){
+    list=ls;
+
+    }
 }

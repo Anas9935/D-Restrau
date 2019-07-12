@@ -40,7 +40,7 @@ public class MessageAdapter extends ArrayAdapter<messageObject> {
             if(!current.getFromUid().equals(myUid))
             {
                 view= LayoutInflater.from(getContext()).inflate(R.layout.message_todo_left,parent,false);
-            }else{
+            }else if(current.getFromUid().equals(myUid)){
                 view= LayoutInflater.from(getContext()).inflate(R.layout.message_todo_right,parent,false);
             }
         }
@@ -55,7 +55,7 @@ public class MessageAdapter extends ArrayAdapter<messageObject> {
 
         setNameAndIcon(name,desigIcon,current.getFromUid());
         message.setText(current.getMessage());
-        time.setText(utilityClass.getTime(current.getTimestamp()));
+        time.setText(utilityClass.getDate(current.getTimestamp())+" "+utilityClass.getTime(current.getTimestamp()));
 
         return view;
     }
