@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -96,6 +97,8 @@ private TextView ProfileName;
         lv.setAdapter(adapter);
         getList();
 
+        setFabVisibility();
+
 
         qrcode=new IntentIntegrator(this);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -129,6 +132,23 @@ private TextView ProfileName;
             }
         });
         populateDrawer();
+    }
+
+    private void setFabVisibility() {
+        lv.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                if (firstVisibleItem<=0 && !fab.isShown())
+                    fab.show();
+                else if(firstVisibleItem>0 && fab.isShown())
+                    fab.hide();
+            }
+        });
     }
 
     private void closeFabMenu() {

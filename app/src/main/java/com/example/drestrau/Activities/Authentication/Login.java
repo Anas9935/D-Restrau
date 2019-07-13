@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,7 +48,8 @@ private Button man;
     private Button guard;
     private Button waiter;
     private Button cleaner;
-private RelativeLayout Progbar;
+private RelativeLayout Progbar,noNet;
+TextView retryBtn;
 private FirebaseAuth mAuth;
 
     @Override
@@ -61,6 +63,9 @@ private FirebaseAuth mAuth;
         emailTV=findViewById(R.id.usernameAuth);
         passwordTV=findViewById(R.id.passwordAuth);
         Progbar=findViewById(R.id.login_firstView);
+        noNet=findViewById(R.id.networkLayout);
+        retryBtn=findViewById(R.id.retryButton);
+        noNet.setVisibility(View.GONE);
         //-------------------------
         //delete between this
         initButtons();
@@ -77,6 +82,14 @@ private FirebaseAuth mAuth;
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(Login.this, Register.class);
+                startActivity(intent);
+            }
+        });
+        retryBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=getIntent();
+                finish();
                 startActivity(intent);
             }
         });
@@ -149,9 +162,11 @@ private FirebaseAuth mAuth;
                         enterUser(user);
                     } else {
                         // If sign in fails, display a message to the user.
-                        Log.w("thisAuth", "signInWithEmail:failure", task.getException());
-                        Toast.makeText(Login.this, "Login failed.",
-                                Toast.LENGTH_SHORT).show();
+                        Log.e("thisAuth", "signInWithEmail:failure"+task.getException().getLocalizedMessage());
+                        if(task.getException().getMessage().equals("A network error (such as timeout, interrupted connection or unreachable host) has occurred.")){
+                            noNet.setVisibility(View.VISIBLE);
+                        }
+                        Toast.makeText(Login.this, "Login failed.", Toast.LENGTH_SHORT).show();
                         enterUser(null);
                     }
 }
