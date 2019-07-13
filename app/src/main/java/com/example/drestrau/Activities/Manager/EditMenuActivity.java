@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -32,10 +33,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -51,14 +54,14 @@ public class EditMenuActivity extends AppCompatActivity {
     private String rid;
 private ListView lv;
 private ArrayList<menuObject> list;
-private Button add;
-    private Button set;
-    private Button fullOffer;
+private FloatingActionButton add;
+    private FloatingActionButton set;
+    private TextView fullOffer;
 private EditText offer;
 private SimpleMenuAdapter adapter;
 private LinearLayout linear;
-private boolean ofr=false;
 private Bitmap bitmapImage;
+TextView offerTv;
 
 private ImageView picForFood;
     @Override
@@ -74,11 +77,13 @@ private ImageView picForFood;
         fullOffer=findViewById(R.id.edit_offer_btn);
         offer=findViewById(R.id.edit_menu_offer);
         linear=findViewById(R.id.edit_fullOffer_lv);
+        offerTv=findViewById(R.id.edit_menu_offerRest);
 
         list=new ArrayList<>();
         adapter=new SimpleMenuAdapter(this,list);
         lv.setAdapter(adapter);
         getMenuItems();
+        getRestOffer();
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,24 +100,40 @@ private ImageView picForFood;
         fullOffer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(ofr){
-                    ofr=false;
-                    linear.setVisibility(View.INVISIBLE);
-                    fullOffer.setVisibility(View.VISIBLE);
-                }else{
-                    ofr=true;
                     linear.setVisibility(View.VISIBLE);
                     fullOffer.setVisibility(View.INVISIBLE);
-                }
             }
         });
         set.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setOfferForFull();
+                linear.setVisibility(View.INVISIBLE);
+                fullOffer.setVisibility(View.VISIBLE);
             }
         });
     }
+
+    private void getRestOffer() {
+        FirebaseDatabase.getInstance().getReference("restaurants").child(rid).child("offer").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Integer off=dataSnapshot.getValue(Integer.class);
+                if(off!=null&&off!=0){
+                    offerTv.setText(off+"% On Full Menu");
+                    offer.setText(String.valueOf(off));
+                }else{
+                    offerTv.setText("");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     private void setOfferForFull(){
         int off=Integer.parseInt(offer.getText().toString());
         FirebaseDatabase.getInstance().getReference("restaurants").child(rid).child("offer").setValue(off);
@@ -141,6 +162,11 @@ private ImageView picForFood;
         final int[] type = new int[]{0}; //0-veg 1-nonveg
         if(mode==1){
             type[0]=list.get(position).getType();
+            if(list.get(position).getPicUrl()!=null){
+                Glide.with(EditMenuActivity.this)
+                        .load(list.get(position).getPicUrl())
+                        .into(picForFood);
+            }
         }
         typ.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,11 +182,7 @@ private ImageView picForFood;
                 }
             }
         });
-        if(list.get(position).getPicUrl()!=null){
-            Glide.with(EditMenuActivity.this)
-                    .load(list.get(position).getPicUrl())
-                    .into(picForFood);
-        }
+
         if(mode==1){
             final menuObject current=list.get(position);
             name.setText(current.getName());

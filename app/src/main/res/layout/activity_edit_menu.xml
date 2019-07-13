@@ -13,21 +13,28 @@
         >
 
     </ListView>
-<Button
-    android:id="@+id/edit_menu_add_btn"
-    android:layout_width="50dp"
-    android:layout_height="50dp"
-    android:layout_gravity="bottom|end"
-    android:layout_margin="16dp"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/edit_menu_add_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:src="@drawable/multiply"
+        android:rotation="45"
+        />
 
-    />
-    <Button
+    <TextView
         android:id="@+id/edit_offer_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="offer on full menu"
         android:layout_gravity="center_horizontal|bottom"
         android:layout_marginBottom="16dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:background="@drawable/textview_bubble"
         />
     <LinearLayout
         android:id="@+id/edit_fullOffer_lv"
@@ -36,20 +43,36 @@
         android:orientation="horizontal"
         android:layout_gravity="center_horizontal|bottom"
         android:layout_marginBottom="16dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
         android:visibility="invisible"
+        android:background="@drawable/textview_bubble"
         >
         <EditText
             android:id="@+id/edit_menu_offer"
-            android:layout_width="150dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:hint="Offer"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
             />
-        <Button
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/edit_menu_setBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="set"
+            android:layout_gravity="center_vertical"
+            app:srcCompat="@drawable/ic_send_black_24dp"
+            app:fabSize="mini"
+            android:backgroundTint="@color/myColorPrimaryLight"
             />
     </LinearLayout>
+    <TextView
+        android:id="@+id/edit_menu_offerRest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        tools:text="10"
+        android:background="@color/myColorPrimaryLight"
+        />
 
 </FrameLayout>
