@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.drestrau.Activities.User.MenuActivity;
 import com.example.drestrau.Objects.menuObject;
 import com.example.drestrau.Objects.quantatySelected;
 import com.example.drestrau.R;
@@ -25,7 +26,6 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class menuAdapter extends ArrayAdapter<menuObject> {
     private final ArrayList<menuObject> list;
-
 
     private final ArrayList<quantatySelected> quantity;
     public menuAdapter( Context context, ArrayList<menuObject> l) {
@@ -107,6 +107,7 @@ public class menuAdapter extends ArrayAdapter<menuObject> {
             quan.setText("1");
             quantatySelected obj=new quantatySelected(current.getFid(),1);
             quantity.add(obj);
+                ((MenuActivity)getContext()).updateCartVisibility();
             }
         });
         ad.setOnClickListener(new View.OnClickListener() {
@@ -138,6 +139,7 @@ public class menuAdapter extends ArrayAdapter<menuObject> {
                         menuadd.setVisibility(View.INVISIBLE);
                         add.setVisibility(View.VISIBLE);
                         quantity.remove(currItem);
+                        ((MenuActivity)getContext()).updateCartVisibility();
                     }else{
                         int quanInt=currItem.getQuantity();
                         quanInt--;
@@ -176,5 +178,7 @@ public class menuAdapter extends ArrayAdapter<menuObject> {
         ch=s.toString();
         return ch;
     }
-
+    public int getQuantitySize(){
+        return quantity.size();
+    }
 }

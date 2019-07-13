@@ -28,7 +28,7 @@ private String rid;
 private ListView listView;
 private ArrayList<menuObject> list;
 private menuAdapter adapter;
-private LinearLayout cart;
+public  LinearLayout cart;
 private String choice;
 private DatabaseReference mRef;
 
@@ -66,7 +66,17 @@ private DatabaseReference mRef;
                startActivity(intent);
             }
         });
+        updateCartVisibility();
 
+    }
+
+    public void updateCartVisibility() {
+        if(adapter.getQuantitySize()==0){
+            cart.setVisibility(View.GONE);
+        }else if(adapter.getQuantitySize()>0){
+            cart.setVisibility(View.VISIBLE);
+
+        }
     }
 
 
