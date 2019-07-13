@@ -22,11 +22,8 @@ import java.util.List;
 
 
 public class GeneralMyOrdersFragment extends Fragment {
-    private RecyclerView rv;
     private MyOrderAdapter adapter;
     private ArrayList<MyOrderObject> list;
-
-    private OrderDatabase mInstance;
 
     public GeneralMyOrdersFragment() {
     }
@@ -37,7 +34,7 @@ public class GeneralMyOrdersFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_general_my_orders, container, false);
         Log.e("Fragment", "onCreateView: My Order Fragment Populated" );
-        rv=view.findViewById(R.id.my_order_fragment_rv);
+        RecyclerView rv = view.findViewById(R.id.my_order_fragment_rv);
         list=new ArrayList<>();
 
         adapter=new MyOrderAdapter(getContext(),list);
@@ -64,13 +61,13 @@ public class GeneralMyOrdersFragment extends Fragment {
 
         return view;
     }
-    public class myCustomAsync extends AsyncTask<String,Void,String>{
+    class myCustomAsync extends AsyncTask<String,Void,String>{
 
 
         @Override
         protected String doInBackground(String... strings) {
-            mInstance=OrderDatabase.getInstance(getContext());
-                List<MyOrderObject> lst=mInstance.objectDao().loadAllObjects();
+            OrderDatabase mInstance = OrderDatabase.getInstance(getContext());
+                List<MyOrderObject> lst= mInstance.objectDao().loadAllObjects();
                 list.addAll(lst);
             return null;
         }

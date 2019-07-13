@@ -21,10 +21,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 public class ChefActivity extends AppCompatActivity {
-String rid;
-ListView lv;
-ChefAdapter adapter;
-ArrayList<selectionForChefObject> list;
+private String rid;
+private ListView lv;
+private ChefAdapter adapter;
+private ArrayList<selectionForChefObject> list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

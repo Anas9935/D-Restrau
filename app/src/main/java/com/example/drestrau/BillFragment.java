@@ -48,7 +48,14 @@ public class BillFragment extends Fragment {
     private String rid,selKey,payKey,choice,uid;
     private int totAmt;
 //    private int totalAmount;
-    private TextView bill_foodList,bill_priceList,bill_tot_amt,dateTv,timeTv,bill_disc,bill_rest_name,amountPaid,orderType;
+    private TextView bill_foodList;
+    private TextView bill_priceList;
+    private TextView dateTv;
+    private TextView timeTv;
+    private TextView bill_disc;
+    private TextView bill_rest_name;
+    private TextView amountPaid;
+    private TextView orderType;
     private ImageView bill_qrcode;
     private long datestamp;
     private int time;
@@ -78,7 +85,7 @@ public class BillFragment extends Fragment {
 
         bill_foodList=root.findViewById(R.id.bill_food_list);
         bill_priceList=root.findViewById(R.id.bill_price_list);
-        bill_tot_amt=root.findViewById(R.id.bill_tot_amount);
+        TextView bill_tot_amt = root.findViewById(R.id.bill_tot_amount);
         bill_qrcode=root.findViewById(R.id.bill_qrCode);
         dateTv=root.findViewById(R.id.bill_date);
         timeTv=root.findViewById(R.id.bill_timeslot);

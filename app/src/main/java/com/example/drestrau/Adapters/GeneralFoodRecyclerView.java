@@ -25,10 +25,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 public class GeneralFoodRecyclerView extends RecyclerView.Adapter<GeneralFoodRecyclerView.ViewHolder> {
-    private ArrayList<menuObjForFood> list;
-    private LayoutInflater inflater;
-    Context context;
-    AdapterView.OnItemClickListener onItemClickListener;
+    private final ArrayList<menuObjForFood> list;
+    private final LayoutInflater inflater;
+    private final Context context;
+    private final AdapterView.OnItemClickListener onItemClickListener;
 
     public GeneralFoodRecyclerView(Context context, ArrayList<menuObjForFood> ls, AdapterView.OnItemClickListener onItemClickListener){
         list=ls;
@@ -38,9 +38,10 @@ public class GeneralFoodRecyclerView extends RecyclerView.Adapter<GeneralFoodRec
     }
 
     public class  ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        ImageView img;
-        TextView off,name;
-        public ViewHolder(View view){
+        final ImageView img;
+        final TextView off;
+        final TextView name;
+        ViewHolder(View view){
             super(view);
 
             img=view.findViewById(R.id.general_food_img);
@@ -71,7 +72,7 @@ public class GeneralFoodRecyclerView extends RecyclerView.Adapter<GeneralFoodRec
                     .load(current.getObject().getPicUrl())
                     .into(viewHolder.img);
         }
-        viewHolder.off.setText(String.valueOf(current.getObject().getOffer())+"% Off");
+        viewHolder.off.setText(current.getObject().getOffer() +"% Off");
         setHotel(viewHolder.name,current.getRid());
     }
 

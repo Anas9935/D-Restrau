@@ -49,15 +49,29 @@ public class addRestrau extends AppCompatActivity {
     private static final int CAMERA_REQUEST =150 ;
     private static final int PICK_IMAGE_FROM_GALLERY =151 ;
     private static final String TAG ="add Restaurant" ;
-    String manId;
-EditText name,managerId,add1,add2,add3,pin,con,email,nos2,nos4,nos6,open,close;
-TextView idStatus;
-RadioButton  yes,no;
-ImageView imgOfRest,cam;
-Button payBtn;
-boolean isApproved=false;
-Bitmap bitmapImage;
-LinearLayout managerLayout;
+    private String manId;
+private EditText name;
+    private EditText managerId;
+    private EditText add1;
+    private EditText add2;
+    private EditText add3;
+    private EditText pin;
+    private EditText con;
+    private EditText email;
+    private EditText nos2;
+    private EditText nos4;
+    private EditText nos6;
+    private EditText open;
+    private EditText close;
+private TextView idStatus;
+private RadioButton  yes;
+    private RadioButton no;
+private ImageView imgOfRest;
+    private ImageView cam;
+private Button payBtn;
+private boolean isApproved=false;
+private Bitmap bitmapImage;
+private LinearLayout managerLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

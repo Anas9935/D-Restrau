@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Adapter_for_payment_manager extends ArrayAdapter<paymentObject> {
-    ArrayList<paymentObject> list;
+    private final ArrayList<paymentObject> list;
 
     public Adapter_for_payment_manager(Context context,ArrayList<paymentObject> ls) {
         super(context, 0,ls);

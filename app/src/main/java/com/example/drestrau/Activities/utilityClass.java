@@ -25,7 +25,7 @@ public class utilityClass {
     }
     public static String getDate(long timestamp){
         SimpleDateFormat formatter=new SimpleDateFormat("dd/mm/yyyy");
-        return formatter.format(new Date(timestamp*1000));
+        return formatter.format(timestamp*1000);//(new Date(timestamp*1000));
     }
     public static void populateTableObject(String rid, final String choice, final TextView foods, final TextView qunatities){
         final ArrayList<menuObject> list;

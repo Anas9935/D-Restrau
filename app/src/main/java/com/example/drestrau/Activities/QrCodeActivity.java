@@ -30,9 +30,12 @@ import static android.graphics.Color.WHITE;
 
 public class QrCodeActivity extends AppCompatActivity {
     private static final int WIDTH = 275;
-    String rid,staffId;
-TextView name,sid;
-ImageView qrcode,qrStatus;
+    private String rid;
+    private String staffId;
+private TextView name;
+    private TextView sid;
+private ImageView qrcode;
+    private ImageView qrStatus;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

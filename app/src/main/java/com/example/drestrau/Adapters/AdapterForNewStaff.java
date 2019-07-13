@@ -15,7 +15,7 @@ import com.example.drestrau.R;
 import java.util.ArrayList;
 
 public class AdapterForNewStaff extends ArrayAdapter<users> {
-    ArrayList<users> list;
+    private final ArrayList<users> list;
 
     public AdapterForNewStaff(Context context,ArrayList<users> ls) {
         super(context, 0,ls);

@@ -4,7 +4,7 @@ import com.example.drestrau.Objects.paymentObject;
 
 import java.util.Comparator;
 
-public class paymentSortingComp implements Comparator<paymentObject> {
+class paymentSortingComp implements Comparator<paymentObject> {
     @Override
     public int compare(paymentObject o1, paymentObject o2) {
         if(o1.getTimestamp()>o2.getTimestamp()){

@@ -28,17 +28,27 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class ManagerActivity extends AppCompatActivity {
-    String rid,uid;
-    ConstraintLayout viewStaff,payment,food;
-    ImageView spec1,spec2,spec3;
-    TextView name1,name2,name3,ProfileName,ProfileViewBtn;;
-    RelativeLayout item1,item2;
-    ImageView profileImg;
-    String staffId;
+    private String rid;
+    private String uid;
+    private ConstraintLayout viewStaff;
+    private ConstraintLayout payment;
+    private ConstraintLayout food;
+    private ImageView spec1;
+    private ImageView spec2;
+    private ImageView spec3;
+    private TextView name1;
+    private TextView name2;
+    private TextView name3;
+    private TextView ProfileName;
+    private TextView ProfileViewBtn;
+    private RelativeLayout item1;
+    private RelativeLayout item2;
+    private ImageView profileImg;
+    private String staffId;
 
 
 
-DatabaseReference staffRef;
+private DatabaseReference staffRef;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

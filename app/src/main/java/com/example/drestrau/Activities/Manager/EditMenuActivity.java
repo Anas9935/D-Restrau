@@ -48,17 +48,19 @@ public class EditMenuActivity extends AppCompatActivity {
     private static final int CAMERA_REQUEST =1001 ;
     private static final int PICK_IMAGE_FROM_GALLERY =1002 ;
     private static final String TAG ="EditMenuActivity" ;
-    String rid;
-ListView lv;
-ArrayList<menuObject> list;
-Button add,set,fullOffer;
-EditText offer;
-SimpleMenuAdapter adapter;
-LinearLayout linear;
-boolean ofr=false;
-Bitmap bitmapImage;
+    private String rid;
+private ListView lv;
+private ArrayList<menuObject> list;
+private Button add;
+    private Button set;
+    private Button fullOffer;
+private EditText offer;
+private SimpleMenuAdapter adapter;
+private LinearLayout linear;
+private boolean ofr=false;
+private Bitmap bitmapImage;
 
-ImageView picForFood;
+private ImageView picForFood;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

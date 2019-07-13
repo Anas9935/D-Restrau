@@ -24,10 +24,10 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
 public class menuAdapter extends ArrayAdapter<menuObject> {
-    ArrayList<menuObject> list;
+    private final ArrayList<menuObject> list;
 
 
-    ArrayList<quantatySelected> quantity;
+    private final ArrayList<quantatySelected> quantity;
     public menuAdapter( Context context, ArrayList<menuObject> l) {
         super(context, 0,l);
         list=l;

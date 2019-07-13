@@ -56,21 +56,27 @@ import static android.graphics.Color.BLACK;
 import static android.graphics.Color.WHITE;
 
 public class ReceptionistActivity extends AppCompatActivity {
-String rid,uid,staffId;
-ListView lv;
-FloatingActionButton fab,scanAtt,newRes;
+private String rid;
+    private String uid;
+    private String staffId;
+private ListView lv;
+private FloatingActionButton fab;
+    private FloatingActionButton scanAtt;
+    private FloatingActionButton newRes;
 //TextView seatNumber;
-int seats;
-int tableSel;
-RecepAdapter adapter;
-ArrayList<RecepObject> list;
+private int seats;
+private int tableSel;
+private RecepAdapter adapter;
+private ArrayList<RecepObject> list;
 
-IntentIntegrator qrcode;
+private IntentIntegrator qrcode;
 
-TextView ProfileName,ProfileViewBtn;
-    RelativeLayout item1,item2;
-    ImageView profileImg;
-    private String TAG="Recep";
+private TextView ProfileName;
+    private TextView ProfileViewBtn;
+    private RelativeLayout item1;
+    private RelativeLayout item2;
+    private ImageView profileImg;
+    private final String TAG="Recep";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

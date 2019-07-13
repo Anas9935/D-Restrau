@@ -29,17 +29,28 @@ import java.util.Calendar;
 
 public class PaymentForFoodActivity extends AppCompatActivity {
     private static final String TAG ="payment" ;
-    String rid,selKey;
-int payableAmt;
-int totAmt;
-RadioButton par,full;
-TextView amount;
-Button debit,paytm,next,cancel,paytm_next;
-EditText cName,cNumber,civ,phnPaytm;
-CheckBox isSaveCard;
-LinearLayout cardLayout,paytmLayout;
-int month,year;
-SharedPreferences.Editor editor;
+    private String rid;
+    private String selKey;
+private int payableAmt;
+private int totAmt;
+private RadioButton par;
+    private RadioButton full;
+private TextView amount;
+private Button debit;
+    private Button paytm;
+    private Button next;
+    private Button cancel;
+    private Button paytm_next;
+private EditText cName;
+    private EditText cNumber;
+    private EditText civ;
+    private EditText phnPaytm;
+private CheckBox isSaveCard;
+private LinearLayout cardLayout;
+    private LinearLayout paytmLayout;
+private int month;
+    private int year;
+private SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

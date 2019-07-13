@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import static android.Manifest.permission.CALL_PHONE;
 
 public class allStaffAdapter extends ArrayAdapter<staffForListObject> {
-    ArrayList<staffForListObject> list;
+    private final ArrayList<staffForListObject> list;
     private int designation=-1;
     public allStaffAdapter(Context context, ArrayList<staffForListObject> lt,int desig) {
         super(context,0,lt);
@@ -102,7 +102,7 @@ public class allStaffAdapter extends ArrayAdapter<staffForListObject> {
         callBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+String.valueOf(current.getContact())));
+                Intent intent=new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+ current.getContact()));
                 if (ContextCompat.checkSelfPermission(getContext().getApplicationContext(), CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
                     getContext().startActivity(intent);
                 } else {

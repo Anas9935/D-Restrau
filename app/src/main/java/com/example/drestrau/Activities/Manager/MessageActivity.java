@@ -22,12 +22,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 public class MessageActivity extends AppCompatActivity {
-    String toId,uid;
-ListView lv;
-EditText message;
-ImageView sendBtn;
-ArrayList<messageObject> list;
-MessageAdapter adapter;
+    private String toId;
+    private String uid;
+private ListView lv;
+private EditText message;
+private ImageView sendBtn;
+private ArrayList<messageObject> list;
+private MessageAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

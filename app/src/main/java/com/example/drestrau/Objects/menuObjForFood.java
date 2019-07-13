@@ -1,8 +1,8 @@
 package com.example.drestrau.Objects;
 
 public class menuObjForFood {
-    private menuObject object;
-    private String rid;
+    private final menuObject object;
+    private final String rid;
     public menuObjForFood(menuObject obj,String id){
         object=obj;
         rid=id;

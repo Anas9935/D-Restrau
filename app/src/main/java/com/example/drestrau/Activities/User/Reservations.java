@@ -41,30 +41,41 @@ import java.util.Date;
 
 public class Reservations extends AppCompatActivity {
     private static final String TAG = "Reservations";
-    String choice;
-String rid;
-TextView resName,food,qty,amt,totAmt,dateSel,status,discount;
-ImageView calender;
-Spinner timepick;
-EditText nop;
-Button pay;
-Switch res;
+    private String choice;
+private String rid;
+private TextView resName;
+    private TextView food;
+    private TextView qty;
+    private TextView amt;
+    private TextView totAmt;
+    private TextView dateSel;
+    private TextView status;
+    private TextView discount;
+private ImageView calender;
+private Spinner timepick;
+private EditText nop;
+private Button pay;
+private Switch res;
 
-int timeindex,nos,noRems;
-String selKey;
+private int timeindex;
+    private int nos;
+    private int noRems;
+private String selKey;
 
-long datestamp;
+private long datestamp;
 
-RelativeLayout spclDisc;
-TextView spclDiscamt;
+private RelativeLayout spclDisc;
+private TextView spclDiscamt;
 
-int baseamt=0,disc=0;
-DatabaseReference menuRef,resRef;
-ArrayList<menuObject> list;
+private int baseamt=0;
+    private int disc=0;
+private DatabaseReference menuRef;
+    private DatabaseReference resRef;
+private ArrayList<menuObject> list;
 
-int fullOffer;
-boolean dataRec=false;
-boolean isAvailable=false;
+private int fullOffer;
+private boolean dataRec=false;
+private boolean isAvailable=false;
 
 
     @Override

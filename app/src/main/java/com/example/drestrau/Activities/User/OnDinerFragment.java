@@ -38,15 +38,12 @@ import java.util.ArrayList;
 
 
 public class OnDinerFragment extends Fragment {
-private Button order,extra,drinks,waiter,cleaner,done;
-private TextView complaint,rest_name,rest_about;
-private ImageView img;
-private View includeView;
-private TextView table,food,quantity;
-String uid,rid;
+    private TextView table,food,quantity;
+private String uid;
+    private String rid;
 private Button scan;
 private RelativeLayout rl;
-IntentIntegrator qrcode;
+private IntentIntegrator qrcode;
     public OnDinerFragment() {
         // Required empty public constructor
     }
@@ -134,21 +131,21 @@ IntentIntegrator qrcode;
     }
 
     private void initializeViews(View view){
-        order=view.findViewById(R.id.diner_order_btn);
-        extra=view.findViewById(R.id.diner_extras_btn);
-        drinks=view.findViewById(R.id.diner_drinks_btn);
-        waiter=view.findViewById(R.id.diner_waiter_btn2);
-        cleaner=view.findViewById(R.id.diner_cleaner_btn);
-        done=view.findViewById(R.id.diner_done_btn);
-        complaint=view.findViewById(R.id.diner_complaint);
-        rest_name=view.findViewById(R.id.diner_name_rest);
-        rest_about=view.findViewById(R.id.diner_about_tv);
-        img=view.findViewById(R.id.diner_img);
+        Button order = view.findViewById(R.id.diner_order_btn);
+        Button extra = view.findViewById(R.id.diner_extras_btn);
+        Button drinks = view.findViewById(R.id.diner_drinks_btn);
+        Button waiter = view.findViewById(R.id.diner_waiter_btn2);
+        Button cleaner = view.findViewById(R.id.diner_cleaner_btn);
+        Button done = view.findViewById(R.id.diner_done_btn);
+        TextView complaint = view.findViewById(R.id.diner_complaint);
+        TextView rest_name = view.findViewById(R.id.diner_name_rest);
+        TextView rest_about = view.findViewById(R.id.diner_about_tv);
+        ImageView img = view.findViewById(R.id.diner_img);
         rl=view.findViewById(R.id.diner_relLayout);
-        includeView=view.findViewById(R.id.diner_include);
-        table=includeView.findViewById(R.id.simple_staff_tableNo);
-        food=includeView.findViewById(R.id.simple_staff_foodItem);
-        quantity=includeView.findViewById(R.id.simple_staff_quantity);
+        View includeView = view.findViewById(R.id.diner_include);
+        table= includeView.findViewById(R.id.simple_staff_tableNo);
+        food= includeView.findViewById(R.id.simple_staff_foodItem);
+        quantity= includeView.findViewById(R.id.simple_staff_quantity);
         scan=view.findViewById(R.id.diner_rl_scan);
     }
 

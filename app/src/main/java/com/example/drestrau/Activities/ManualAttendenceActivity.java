@@ -27,10 +27,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ManualAttendenceActivity extends AppCompatActivity {
-String rid,uid;
-ListView lv;
-ArrayList<staffForListObject> list;
-allStaffAdapter adapter;
+private String rid;
+    private String uid;
+private ListView lv;
+private ArrayList<staffForListObject> list;
+private allStaffAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

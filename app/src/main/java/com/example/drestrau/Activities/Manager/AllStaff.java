@@ -39,14 +39,14 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class AllStaff extends AppCompatActivity {
-ListView lv;
-allStaffAdapter adapter;
-ArrayList<staffForListObject> list;
+private ListView lv;
+private allStaffAdapter adapter;
+private ArrayList<staffForListObject> list;
 FloatingActionButton addstaff;
-String rid;
-DatabaseReference staffRef;
-    ArrayList<users> listForNewStaff;
-    AdapterForNewStaff adapterForNewStaff;
+private String rid;
+private DatabaseReference staffRef;
+    private ArrayList<users> listForNewStaff;
+    private AdapterForNewStaff adapterForNewStaff;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -24,13 +24,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 public class MenuActivity extends AppCompatActivity {
-String rid;
-ListView listView;
-ArrayList<menuObject> list;
-menuAdapter adapter;
-LinearLayout cart;
-String choice;
-DatabaseReference mRef;
+private String rid;
+private ListView listView;
+private ArrayList<menuObject> list;
+private menuAdapter adapter;
+private LinearLayout cart;
+private String choice;
+private DatabaseReference mRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

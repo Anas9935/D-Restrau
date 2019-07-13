@@ -25,8 +25,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 public class ChefAdapter extends ArrayAdapter<selectionForChefObject> {
-    ArrayList<selectionForChefObject> list;
-    String rid;
+    private final ArrayList<selectionForChefObject> list;
+    private final String rid;
 
     public ChefAdapter(Context context, ArrayList<selectionForChefObject> ls,String restId) {
         super(context, 0,ls);

@@ -3,10 +3,10 @@ package com.example.drestrau.Objects;
 public class staffForListObject {
     private String name;
     private String picUrl;
-    private String staffId;
-    private String staffUid;
+    private final String staffId;
+    private final String staffUid;
     private long contact;
-    private int designaton;
+    private final int designaton;
     private int paydue;
     public staffForListObject(String nme,String url,String sid,String uid,long phno,int desig){
         name=nme;

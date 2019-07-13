@@ -54,20 +54,35 @@ import java.util.Date;
 
 public class addStaff extends AppCompatActivity {
     private static final String TAG ="add Staff" ;
-    EditText name,name2,name3,add1,add2,add3,con1,con2,salary,email,pincode;
+    private EditText name;
+    private EditText name2;
+    private EditText name3;
+    private EditText add1;
+    private EditText add2;
+    private EditText add3;
+    private EditText con1;
+    private EditText con2;
+    private EditText salary;
+    private EditText email;
+    private EditText pincode;
 
-TextView doj,dob;
-RadioButton male,female;
-ImageView datepick,pic,cam;
-Spinner desig;
+private TextView doj;
+    private TextView dob;
+private RadioButton male;
+    private RadioButton female;
+private ImageView datepick;
+    private ImageView pic;
+    private ImageView cam;
+private Spinner desig;
 
-String rid;
-String staffUid;
-DatePicker pickAdate;
-int designation=0;
-long mdoj,mdob;
-int gender;
-Bitmap bitmapImage;
+private String rid;
+private String staffUid;
+private DatePicker pickAdate;
+private int designation=0;
+private long mdoj;
+    private long mdob;
+private int gender;
+private Bitmap bitmapImage;
     private static final int CAMERA_REQUEST =1000 ;
     private static final int PICK_IMAGE_FROM_GALLERY =1100 ;
     @Override
@@ -219,7 +234,7 @@ Bitmap bitmapImage;
         });
         */
     }
-    public void setupSpinner(){
+    private void setupSpinner(){
         final ArrayAdapter<CharSequence> des=ArrayAdapter.createFromResource(this,R.array.designation,android.R.layout.simple_spinner_item);
         des.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         desig.setAdapter(des);
@@ -234,7 +249,7 @@ Bitmap bitmapImage;
             }
         });
     }
-    public void populateform(){
+    private void populateform(){
 
         //TODO extract the data of the user with _uid=uid
         FirebaseDatabase.getInstance().getReference("users").addChildEventListener(new ChildEventListener() {

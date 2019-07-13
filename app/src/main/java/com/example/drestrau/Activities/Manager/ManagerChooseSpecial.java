@@ -22,12 +22,12 @@ import java.util.ArrayList;
 
 public class ManagerChooseSpecial extends AppCompatActivity {
 
-    String rid;
-    int pos;
+    private String rid;
+    private int pos;
 
-    ArrayList<menuObject> list;
-    SimpleMenuAdapter adapter;
-    ListView lv;
+    private ArrayList<menuObject> list;
+    private SimpleMenuAdapter adapter;
+    private ListView lv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +46,7 @@ public class ManagerChooseSpecial extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //here update the rid with new id
-                FirebaseDatabase.getInstance().getReference("restaurants").child(rid).child("spec"+String.valueOf(pos)).setValue(list.get(position).getFid());
+                FirebaseDatabase.getInstance().getReference("restaurants").child(rid).child("spec"+ pos).setValue(list.get(position).getFid());
                 Toast.makeText(ManagerChooseSpecial.this, "Speciality Updated", Toast.LENGTH_SHORT).show();
                 finish();
             }

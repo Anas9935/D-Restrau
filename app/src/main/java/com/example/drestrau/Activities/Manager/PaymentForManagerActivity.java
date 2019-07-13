@@ -20,10 +20,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class PaymentForManagerActivity extends AppCompatActivity {
-ListView lv;
-String rid;
-Adapter_for_payment_manager adapter_for_payment_manager;
-ArrayList<paymentObject> list;
+private ListView lv;
+private String rid;
+private Adapter_for_payment_manager adapter_for_payment_manager;
+private ArrayList<paymentObject> list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

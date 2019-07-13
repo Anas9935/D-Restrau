@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class resAdapter extends ArrayAdapter<RestObject> {
 
-ArrayList<RestObject> list;
+private final ArrayList<RestObject> list;
     public resAdapter(Context context, ArrayList<RestObject> l) {
         super(context,0,l);
         list=l;

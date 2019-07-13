@@ -23,11 +23,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class Register extends AppCompatActivity {
-EditText number,email,password;
-ImageView save;
-FirebaseAuth mAuth;
-FirebaseDatabase db;
-DatabaseReference mRef;
+private EditText number;
+    private EditText email;
+    private EditText password;
+private ImageView save;
+private FirebaseAuth mAuth;
+private FirebaseDatabase db;
+private DatabaseReference mRef;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -38,22 +38,30 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class SimpleStaffActivity extends AppCompatActivity {
-String rid,uid,mangrId;
-int desig;
-TextView name,food,quan,tableNo,ProfileName,ProfileViewBtn;
-RelativeLayout item1,item2;
-ImageView profileImg;
-Spinner tableSel;
-ListView message;
-MessageAdapter adapter;
-ArrayList<messageObject> list;
-ArrayList<menuObject> menu;
+private String rid;
+    private String uid;
+    private String mangrId;
+private int desig;
+private TextView name;
+    private TextView food;
+    private TextView quan;
+    private TextView tableNo;
+    private TextView ProfileName;
+    private TextView ProfileViewBtn;
+private RelativeLayout item1;
+    private RelativeLayout item2;
+private ImageView profileImg;
+private Spinner tableSel;
+private ListView message;
+private MessageAdapter adapter;
+private ArrayList<messageObject> list;
+private ArrayList<menuObject> menu;
 
-    String staffId;
-EditText messManager;
-ImageView send;
+    private String staffId;
+private EditText messManager;
+private ImageView send;
 //LinearLayout ll;
-ConstraintLayout cl;
+private ConstraintLayout cl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

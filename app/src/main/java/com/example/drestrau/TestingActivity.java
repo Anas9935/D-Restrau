@@ -42,12 +42,13 @@ import java.util.Calendar;
 import java.util.List;
 
 public class TestingActivity extends AppCompatActivity {
-Button rest,food;
+private Button rest;
+    private Button food;
 String key;
 ArrayList<MyOrderObject> list;
 MyOrderAdapter adapter;
-RecyclerView rv;
-    private String TAG="TestingActivity";
+private RecyclerView rv;
+    private final String TAG="TestingActivity";
 
 
     @Override

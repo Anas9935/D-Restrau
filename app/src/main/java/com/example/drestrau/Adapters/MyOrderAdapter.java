@@ -53,9 +53,9 @@ import static android.graphics.Color.WHITE;
 
 public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.CustomViewHolder> {
     private static final int WIDTH = 300;
-    ArrayList<MyOrderObject> list;
-Context context;
-ArrayList<menuObject> menuObjects;
+    private ArrayList<MyOrderObject> list;
+private final Context context;
+private final ArrayList<menuObject> menuObjects;
 public MyOrderAdapter(Context context, ArrayList<MyOrderObject> ls){
     list=ls;
     this.context=context;
@@ -63,10 +63,15 @@ public MyOrderAdapter(Context context, ArrayList<MyOrderObject> ls){
 }
 
     public class CustomViewHolder extends RecyclerView.ViewHolder{
-        TextView name,address,price,choice,date,time;
-        Button reOrder;
-        ImageView qrCode;
-        public CustomViewHolder(View itemView){
+        final TextView name;
+        final TextView address;
+        final TextView price;
+        final TextView choice;
+        final TextView date;
+        final TextView time;
+        final Button reOrder;
+        final ImageView qrCode;
+        CustomViewHolder(View itemView){
             super(itemView);
             name=itemView.findViewById(R.id.my_order_todo_name);
             address=itemView.findViewById(R.id.my_order_todo_address);

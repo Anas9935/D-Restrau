@@ -38,14 +38,26 @@ import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
 public class ProfileActivity extends AppCompatActivity {
-    String uid,rid,staffId;
-    TextView name,email,phno1,phno2,address1,address2,id,pin;
-    Toolbar toolbar;
-    ImageView img;
+    private String uid;
+    private String rid;
+    private String staffId;
+    private TextView name;
+    private TextView email;
+    private TextView phno1;
+    private TextView phno2;
+    private TextView address1;
+    private TextView address2;
+    private TextView id;
+    private TextView pin;
+    private Toolbar toolbar;
+    private ImageView img;
     //for the attendence
-    TextView pres,abs,sal,register_rest;
-    LinearLayout attendanceLayout;
-    int isStaff=-1;
+    private TextView pres;
+    private TextView abs;
+    private TextView sal;
+    private TextView register_rest;
+    private LinearLayout attendanceLayout;
+    private int isStaff=-1;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

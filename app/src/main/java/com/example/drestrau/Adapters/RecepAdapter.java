@@ -24,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class RecepAdapter extends ArrayAdapter<RecepObject> {
-    ArrayList<RecepObject> list;
+    private final ArrayList<RecepObject> list;
 
     public RecepAdapter(Context context,ArrayList<RecepObject> ls) {
         super(context, 0,ls);

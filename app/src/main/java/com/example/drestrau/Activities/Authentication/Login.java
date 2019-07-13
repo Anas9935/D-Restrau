@@ -33,12 +33,22 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class Login extends AppCompatActivity {
-EditText emailTV,passwordTV;
-Button login,create;
+private EditText emailTV;
+    private EditText passwordTV;
+private Button login;
+    private Button create;
 //To delete After Testing
-    Button man,user,recep,cook,chef,bar,guard,waiter,cleaner;
-RelativeLayout Progbar;
-FirebaseAuth mAuth;
+private Button man;
+    private Button user;
+    private Button recep;
+    private Button cook;
+    private Button chef;
+    private Button bar;
+    private Button guard;
+    private Button waiter;
+    private Button cleaner;
+private RelativeLayout Progbar;
+private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,8 +97,8 @@ FirebaseAuth mAuth;
     }
     //delete this class
     class myClickListener implements View.OnClickListener {
-        String mail;
-        public myClickListener(String email){
+        final String mail;
+        myClickListener(String email){
             mail=email;
         }
         @Override

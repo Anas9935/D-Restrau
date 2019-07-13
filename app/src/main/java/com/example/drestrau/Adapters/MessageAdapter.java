@@ -24,8 +24,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class MessageAdapter extends ArrayAdapter<messageObject> {
-    ArrayList<messageObject> list;
-    String myUid;
+    private final ArrayList<messageObject> list;
+    private final String myUid;
     public MessageAdapter(Context context,ArrayList<messageObject> ls,String id) {
         super(context,0,ls);
         list=ls;
@@ -42,6 +42,8 @@ public class MessageAdapter extends ArrayAdapter<messageObject> {
                 view= LayoutInflater.from(getContext()).inflate(R.layout.message_todo_left,parent,false);
             }else if(current.getFromUid().equals(myUid)){
                 view= LayoutInflater.from(getContext()).inflate(R.layout.message_todo_right,parent,false);
+            }else{
+                return view;
             }
         }
 
@@ -55,7 +57,10 @@ public class MessageAdapter extends ArrayAdapter<messageObject> {
 
         setNameAndIcon(name,desigIcon,current.getFromUid());
         message.setText(current.getMessage());
-        time.setText(utilityClass.getDate(current.getTimestamp())+" "+utilityClass.getTime(current.getTimestamp()));
+        String[] dt=utilityClass.getDate(current.getTimestamp()).split("/");
+
+        time.setText(dt[0] + "/" + dt[1]);
+        time.append(" "+utilityClass.getTime(current.getTimestamp()));
 
         return view;
     }

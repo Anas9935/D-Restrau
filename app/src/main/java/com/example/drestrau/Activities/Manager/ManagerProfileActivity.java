@@ -62,18 +62,48 @@ import java.util.Date;
 public class ManagerProfileActivity extends AppCompatActivity {
     private static final int CAMERA_REQUEST =1100 ;
     private static final int PICK_IMAGE_FROM_GALLERY =1101 ;
-    String staffId,rid;
-ImageView img,datePicker,cam;
-TextView name,gender,age,doj,desig,address,pincode,con1,con2,email,sal,uid,sid,dob,edit,save;
+    private String staffId;
+    private String rid;
+private ImageView img;
+    private ImageView datePicker;
+    private ImageView cam;
+private TextView name;
+    private TextView gender;
+    private TextView age;
+    private TextView doj;
+    private TextView desig;
+    private TextView address;
+    private TextView pincode;
+    private TextView con1;
+    private TextView con2;
+    private TextView email;
+    private TextView sal;
+    private TextView uid;
+    private TextView sid;
+    private TextView dob;
+    private TextView edit;
+    private TextView save;
 //for edit mode
-EditText fName,mName,lName,add1,add2,add3,pincodeEv,con1Ev,con2Ev,emailEv,salaryEv;
-RadioButton male,female;
-Spinner desigSpin;
-staffObject myData;
-LinearLayout normalMode,editMode;
-int desigInt=-1;
-long newDOB;
-Bitmap bitmapImage;
+private EditText fName;
+    private EditText mName;
+    private EditText lName;
+    private EditText add1;
+    private EditText add2;
+    private EditText add3;
+    private EditText pincodeEv;
+    private EditText con1Ev;
+    private EditText con2Ev;
+    private EditText emailEv;
+    private EditText salaryEv;
+private RadioButton male;
+    private RadioButton female;
+private Spinner desigSpin;
+private staffObject myData;
+private LinearLayout normalMode;
+    private LinearLayout editMode;
+private int desigInt=-1;
+private long newDOB;
+private Bitmap bitmapImage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -193,10 +223,9 @@ Bitmap bitmapImage;
             age--;
         }
 
-        Integer ageInt = new Integer(age);
-        String ageS = ageInt.toString();
+        Integer ageInt = age;
 
-        return ageS;
+            return ageInt.toString();
     }
     private void editMode() {
         normalMode.setVisibility(View.GONE);

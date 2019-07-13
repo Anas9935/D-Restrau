@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 public class SimpleMenuAdapter extends ArrayAdapter<menuObject> {
 
-    ArrayList<menuObject> list;
+    private final ArrayList<menuObject> list;
 
     public SimpleMenuAdapter(Context context, ArrayList<menuObject> lv) {
         super(context, 0,lv);
