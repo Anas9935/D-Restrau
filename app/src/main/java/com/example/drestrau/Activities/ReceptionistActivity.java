@@ -9,9 +9,11 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.OvershootInterpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -63,6 +65,7 @@ private ListView lv;
 private FloatingActionButton fab;
     private FloatingActionButton scanAtt;
     private FloatingActionButton newRes;
+    LinearLayout ll,scan,newresLL;
 //TextView seatNumber;
 private int seats;
 private int tableSel;
@@ -77,6 +80,7 @@ private TextView ProfileName;
     private RelativeLayout item2;
     private ImageView profileImg;
     private final String TAG="Recep";
+    boolean fabMenuOpen=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,23 +102,62 @@ private TextView ProfileName;
             @Override
             public void onClick(View v) {
                 //disable the background
+                if(!fabMenuOpen)
+                { openFabMenu();
+                }else{ closeFabMenu();
+                }
+
             }
         });
         scanAtt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 qrcode.initiateScan();
+                closeFabMenu();
             }
         });
         newRes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                closeFabMenu();
             }
         });
-
+        ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                closeFabMenu();
+            }
+        });
         populateDrawer();
     }
+
+    private void closeFabMenu() {
+        fabMenuOpen=false;
+        lv.setEnabled(true);
+        fab.animate().rotation(-135f).setDuration(250);
+        scan.animate().translationY(200).setInterpolator(new OvershootInterpolator()).setDuration(250);
+        newresLL.animate().translationX(200).setInterpolator(new OvershootInterpolator()).setDuration(250);
+        try {
+            Thread.sleep(250);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ll.setVisibility(View.GONE);
+        scan.setVisibility(View.GONE);
+        newresLL.setVisibility(View.GONE);
+    }
+
+    private void openFabMenu() {
+        fabMenuOpen=true;
+        lv.setEnabled(false);
+        ll.setVisibility(View.VISIBLE);
+        scan.setVisibility(View.VISIBLE);
+        newresLL.setVisibility(View.VISIBLE);
+        fab.animate().rotation(0).setDuration(250);
+        scan.animate().translationY(-200).setInterpolator(new OvershootInterpolator()).setDuration(250);
+        newresLL.animate().translationX(-200).setInterpolator(new OvershootInterpolator()).setDuration(250);
+    }
+
     private void getRestNameAndSeats(final TextView tv) {
         FirebaseDatabase.getInstance().getReference("restaurants").child(rid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -140,6 +183,9 @@ private TextView ProfileName;
         fab=findViewById(R.id.recep_fab);
         scanAtt=findViewById(R.id.recep_scan_atten);
         newRes=findViewById(R.id.recep_newRes);
+        ll=findViewById(R.id.recep_linear);
+        scan=findViewById(R.id.scan_lL);
+        newresLL=findViewById(R.id.newRes_LL);
 
         //for the drawer
         ProfileName=findViewById(R.id.userName);
@@ -423,6 +469,7 @@ private TextView ProfileName;
                 Intent intent=new Intent(ReceptionistActivity.this,ManualAttendenceActivity.class);
                 intent.putExtra("rid",rid);
                 startActivity(intent);
+                closeFabMenu();
                 return true;
             }
             default:{
@@ -491,6 +538,7 @@ private TextView ProfileName;
                 intent.putExtra("isStaff",1);
                 intent.putExtra("rid",rid);
                 startActivity(intent);
+                closeFabMenu();
 
             }
         });
@@ -502,6 +550,7 @@ private TextView ProfileName;
                     intent.putExtra("rid", rid);
                     intent.putExtra("staffId",staffId );
                     startActivity(intent);
+                    closeFabMenu();
                 }
             }
         });

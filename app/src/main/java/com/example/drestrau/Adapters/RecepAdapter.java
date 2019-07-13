@@ -33,14 +33,15 @@ public class RecepAdapter extends ArrayAdapter<RecepObject> {
 
     @Override
     public View getView(int position,View convertView,ViewGroup parent) {
+        final int[] lock = {0};     //locked
         View view=convertView;
         if(view==null){
             view= LayoutInflater.from(getContext()).inflate(R.layout.recep_todo_new,parent,false);
         }
-        TextView name,id,amount;
-        ImageView custS;
-        final Spinner mode,status;
-        View sts;
+        final TextView name,id,amount,status;
+        final ImageView custS,lockBtn;
+        final Spinner mode;
+        final View sts;
         name=view.findViewById(R.id.recep_todo_nametv);
         id=view.findViewById(R.id.recep_todo_pidTv);
         amount=view.findViewById(R.id.recep_todo_amount);
@@ -48,7 +49,27 @@ public class RecepAdapter extends ArrayAdapter<RecepObject> {
         sts=view.findViewById(R.id.recep_todo_indic1);
         mode=view.findViewById(R.id.recep_todo_mop_spin);
         status=view.findViewById(R.id.recep_todo_stat_spin);
+        lockBtn=view.findViewById(R.id.lock);
 
+            mode.setEnabled(false);
+            status.setEnabled(false);
+
+        lockBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(lock[0] ==0){
+                    lock[0] =1;
+                    lockBtn.setImageDrawable(getContext().getResources().getDrawable(R.drawable.ic_lock_open_black_24dp));
+                    mode.setEnabled(true);
+                    status.setEnabled(true);
+                }else{
+                    lock[0] =0;
+                    lockBtn.setImageDrawable(getContext().getResources().getDrawable(R.drawable.ic_lock_black_24dp));
+                    mode.setEnabled(false);
+                    status.setEnabled(false);
+                }
+            }
+        });
         final RecepObject current=list.get(position);
 
         setName(name,current.getUid());
@@ -73,7 +94,6 @@ public class RecepAdapter extends ArrayAdapter<RecepObject> {
                 break;
             }
         }
-
         switch (current.getStatus()){
             case 1:{
                 sts.setBackgroundColor(Color.rgb(0,0,255));
@@ -89,6 +109,7 @@ public class RecepAdapter extends ArrayAdapter<RecepObject> {
 
             }
         }
+
         //setting up spinners
         mode.setSelection(current.getMode());
         final ArrayAdapter<CharSequence> mod=ArrayAdapter.createFromResource(getContext(),R.array.paymentMode,android.R.layout.simple_spinner_item);
@@ -105,29 +126,32 @@ public class RecepAdapter extends ArrayAdapter<RecepObject> {
 
             }
         });
-        status.setSelection(current.getStatus());
-        final ArrayAdapter<CharSequence> sta=ArrayAdapter.createFromResource(getContext(),R.array.paymentStatus,android.R.layout.simple_spinner_item);
-        sta.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        status.setAdapter(sta);
-        status.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        if(current.getStatus()==2){
+            status.setText("Received");
+            current.setCustStat(2);
+            notifyDataSetChanged();
+        }
+        status.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                current.setStatus(position);
-                if(position==2){
+            public void onClick(View v) {
+                if(current.getStatus()!=2){
+                status.setText("Received");
+                current.setStatus(2);
+                if(current.getStatus()==2){
                     current.setCustStat(2);
                 }
                 updateCurrent(current);
+                }
             }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
 
-            }
         });
 
 
 
         return view;
     }
+
+
     private void setName(final TextView tv, String id){
         FirebaseDatabase.getInstance().getReference("users").child(id).child("name").addValueEventListener(new ValueEventListener() {
             @Override

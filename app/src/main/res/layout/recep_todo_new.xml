@@ -39,10 +39,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:ellipsize="end"
-        android:maxWidth="150dp"
-        android:maxLines="1"
         android:text="amsbadvfelhvlvsclhvsclhvslidsvbl"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView11"
         app:layout_constraintStart_toEndOf="@+id/textView11"
         app:layout_constraintTop_toTopOf="@+id/textView11" />
 
@@ -64,22 +63,30 @@
         app:layout_constraintEnd_toStartOf="@+id/recep_todo_amount"
         app:layout_constraintTop_toTopOf="@+id/recep_todo_nametv" />
 
-    <Spinner
+    <TextView
         android:id="@+id/recep_todo_stat_spin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:background="@drawable/button_cover"
+        android:gravity="center_horizontal"
+        android:text="Receive"
+        android:textColor="@color/myColorAccent"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recep_todo_mop_spin" />
+
+    <Spinner
+        android:id="@+id/recep_todo_mop_spin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toStartOf="@+id/recep_todo_indic1"
         app:layout_constraintStart_toStartOf="@+id/textView16"
         app:layout_constraintTop_toBottomOf="@+id/textView16" />
-
-    <Spinner
-        android:id="@+id/recep_todo_mop_spin"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@+id/recep_todo_stat_spin"
-        app:layout_constraintStart_toStartOf="@+id/recep_todo_stat_spin"
-        app:layout_constraintTop_toBottomOf="@+id/recep_todo_stat_spin" />
 
     <ImageView
         android:id="@+id/recep_todo_indic1"
@@ -88,6 +95,7 @@
         app:layout_constraintBottom_toTopOf="@+id/recep_todo_mop_spin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/recep_todo_stat_spin"
+        app:layout_constraintVertical_bias="0.525"
         app:srcCompat="@color/colorAccent" />
 
     <ImageView
@@ -99,5 +107,14 @@
         app:layout_constraintStart_toEndOf="@+id/recep_todo_nametv"
         app:layout_constraintTop_toTopOf="@+id/textView6"
         app:srcCompat="@android:color/holo_blue_dark" />
+
+    <ImageView
+        android:id="@+id/lock"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recep_todo_indic1"
+        app:srcCompat="@drawable/ic_lock_black_24dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
