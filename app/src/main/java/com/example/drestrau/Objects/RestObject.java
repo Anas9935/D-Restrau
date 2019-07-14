@@ -18,11 +18,12 @@ public class RestObject {
     // private int seatsOccupied;
     private int opening;
     private int closing;
-    private String pivtureUrl;
+    private String pictureUrl;
     private int offer;
     private String spec1;
     private String spec2;
     private String spec3;
+    private String about;
 
     public RestObject(){}
     public RestObject(String nam,String mid,String a1,String a2,String a3,long pincode,float r,long phn,int seat2,int seat4,int seat6,int open,int close,String mail)
@@ -40,7 +41,7 @@ public class RestObject {
         seats6=seat6;
         opening=open;
         closing=close;
-        pivtureUrl=null;
+        pictureUrl=null;
         email=mail;
         pin=pincode;
     //    seatsOccupied=0;
@@ -49,6 +50,15 @@ public class RestObject {
     public int getSeats2() {
         return seats2;
     }
+
+    public String getAbout() {
+        return about;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
+    }
+
 
     public int getSeats4() {
         return seats4;
@@ -192,12 +202,12 @@ public class RestObject {
     }
 
 
-    public String getPivtureUrl() {
-        return pivtureUrl;
+    public String getpictureUrl() {
+        return pictureUrl;
     }
 
-    public void setPivtureUrl(String pivtureUrl) {
-        this.pivtureUrl = pivtureUrl;
+    public void setpictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
     }
 
     public String getName() {

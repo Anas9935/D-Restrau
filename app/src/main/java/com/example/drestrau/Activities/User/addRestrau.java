@@ -312,7 +312,7 @@ private LinearLayout managerLayout;
                         public void onComplete(@NonNull Task<Uri> task) {
                             if (task.isSuccessful()) {
                                 Uri downUri = task.getResult();
-                                object.setPivtureUrl(downUri.toString());
+                                object.setpictureUrl(downUri.toString());
                                 FirebaseDatabase.getInstance().getReference("restaurants").child(object.getRid()).setValue(object);
                                 Log.e("Final URL", "onComplete: Url: " + downUri.toString());
                                // Toast.makeText(addRestrau.this,"Imag",Toast.LENGTH_SHORT).show();

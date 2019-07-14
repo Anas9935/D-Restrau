@@ -429,7 +429,6 @@
                     android:layout_below="@+id/simple_title"
                     android:layout_alignParentEnd="true" />
             </RelativeLayout>
-
             <RelativeLayout
                 android:id="@+id/simple_staffRVItem2"
                 android:layout_width="280dp"
@@ -441,6 +440,44 @@
                     android:id="@+id/icon2"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
+                    app:srcCompat="@drawable/qrcode"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    />
+
+                <TextView
+                    android:id="@+id/simple_title2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:gravity="center_vertical"
+                    android:textColor="#000"
+                    android:text="About Restaurant"
+                    android:textStyle="bold"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/icon2" />
+
+                <TextView android:id="@+id/subTitle2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Your Qr Code for Attendence"
+                    android:layout_toEndOf="@+id/icon2"
+                    android:layout_below="@+id/simple_title2"
+                    android:layout_alignParentEnd="true" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/simple_staffRVItem3"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:layout_below="@id/simple_staffRVItem2"
+                android:background="#ffffff">
+                <ImageView
+                    android:id="@+id/icon3"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     app:srcCompat="@drawable/about"
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="20dp"
@@ -449,7 +486,7 @@
                     />
 
                 <TextView
-                    android:id="@+id/title2"
+                    android:id="@+id/title3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
@@ -458,14 +495,14 @@
                     android:text="About Us"
                     android:textStyle="bold"
                     android:layout_alignParentTop="true"
-                    android:layout_toEndOf="@+id/icon2" />
+                    android:layout_toEndOf="@+id/icon3" />
 
-                <TextView android:id="@+id/subTitle2"
+                <TextView android:id="@+id/subTitle3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Know Something about us"
-                    android:layout_toEndOf="@+id/icon2"
-                    android:layout_below="@+id/title2"
+                    android:layout_toEndOf="@+id/icon3"
+                    android:layout_below="@+id/title3"
                     android:layout_alignParentEnd="true" />
             </RelativeLayout>
 

@@ -50,9 +50,9 @@ private final ArrayList<RestObject> list;
         add3.setText(current.getAdd3());
         contact.setText(String.valueOf(current.getPhno()));
         timing.setText(current.getOpening()+":00-:"+current.getClosing()+":00");
-        if(current.getPivtureUrl()!=null){
+        if(current.getpictureUrl()!=null){
             Glide.with(getContext())
-                    .load(current.getPivtureUrl())
+                    .load(current.getpictureUrl())
                     .into(img);
         }
         bar.setRating(current.getRating());

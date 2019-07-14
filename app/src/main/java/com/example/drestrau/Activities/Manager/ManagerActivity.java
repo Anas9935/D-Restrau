@@ -2,8 +2,6 @@ package com.example.drestrau.Activities.Manager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -17,7 +15,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.bumptech.glide.Glide;
 import com.example.drestrau.Activities.ProfileActivity;
 import com.example.drestrau.Activities.QrCodeActivity;
-import com.example.drestrau.Objects.staffObject;
 import com.example.drestrau.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -42,7 +39,7 @@ public class ManagerActivity extends AppCompatActivity {
     private TextView ProfileName;
     private TextView ProfileViewBtn;
     private RelativeLayout item1;
-    private RelativeLayout item2;
+    private RelativeLayout item2,item3;
     private ImageView profileImg;
     private String staffId;
 
@@ -104,6 +101,7 @@ private DatabaseReference staffRef;
         ProfileViewBtn=findViewById(R.id.desc);
         item1=findViewById(R.id.simple_staffRVItem1);
         item2=findViewById(R.id.simple_staffRVItem2);
+        item3 =findViewById(R.id.simple_staffRVItem3);
         profileImg=findViewById(R.id.avatar);
     }
     private void setSpeciality(){
@@ -276,6 +274,14 @@ private DatabaseReference staffRef;
             }
         });
         item2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(ManagerActivity.this,AboutRestActivity.class);
+                intent.putExtra("rid",rid);
+                startActivity(intent);
+            }
+        });
+        item3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();

@@ -22,7 +22,8 @@
         android:supportsRtl="true"
         android:theme="@style/Mytheme"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".Activities.Manager.ManagerProfileActivity"></activity>
+        <activity android:name=".Activities.Manager.AboutRestActivity"></activity>
+        <activity android:name=".Activities.Manager.ManagerProfileActivity" />
         <activity
             android:name=".Activities.User.GeneralUserNew"
             android:label="@string/title_activity_general_user_new" />
@@ -36,16 +37,15 @@
         <activity
             android:name=".Activities.ReceptionistActivity"
             android:theme="@style/myThemeWithAction" />
-        <activity
-            android:name=".Activities.ChefActivity" />
+        <activity android:name=".Activities.ChefActivity" />
         <activity android:name=".Activities.ProfileActivity" />
         <activity android:name=".Activities.Manager.EditMenuActivity" />
-        <activity android:name=".Activities.Manager.AllStaff"
-            android:theme="@style/myThemeWithAction"
-            />
-        <activity android:name=".Activities.User.addRestrau"
-            android:theme="@style/myThemeWithAction"
-            />
+        <activity
+            android:name=".Activities.Manager.AllStaff"
+            android:theme="@style/myThemeWithAction" />
+        <activity
+            android:name=".Activities.User.addRestrau"
+            android:theme="@style/myThemeWithAction" />
         <activity android:name=".TestingActivity" />
         <activity android:name=".Activities.User.Reservations" />
         <activity android:name=".Activities.User.MenuActivity" />
