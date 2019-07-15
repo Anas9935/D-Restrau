@@ -38,19 +38,6 @@ public class GeneralMyOrdersFragment extends Fragment {
         list=new ArrayList<>();
 
         adapter=new MyOrderAdapter(getContext(),list);
-//        Thread thread=new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                mInstance=OrderDatabase.getInstance(getContext());
-//                List<MyOrderObject> lst=mInstance.objectDao().loadAllObjects();
-//                list.addAll(lst);
-//                adapter.setList(list);
-//               // adapter.notifyDataSetChanged();
-//            }
-//        });
-//        thread.start();
-//
-//
         myCustomAsync newasnc=new myCustomAsync();
         newasnc.execute("String");
         rv.setHasFixedSize(true);

@@ -2,7 +2,6 @@ package com.example.drestrau.Activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -43,10 +42,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.MultiFormatWriter;
-import com.google.zxing.WriterException;
-import com.google.zxing.common.BitMatrix;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -54,9 +49,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-
-import static android.graphics.Color.BLACK;
-import static android.graphics.Color.WHITE;
 
 public class ReceptionistActivity extends AppCompatActivity {
 private String rid;
@@ -131,6 +123,7 @@ private TextView ProfileName;
                 closeFabMenu();
             }
         });
+        fab.setActivated(false);
         populateDrawer();
     }
 
@@ -150,7 +143,6 @@ private TextView ProfileName;
             }
         });
     }
-
     private void closeFabMenu() {
         fabMenuOpen=false;
         lv.setEnabled(true);
@@ -166,7 +158,6 @@ private TextView ProfileName;
         scan.setVisibility(View.GONE);
         newresLL.setVisibility(View.GONE);
     }
-
     private void openFabMenu() {
         fabMenuOpen=true;
         lv.setEnabled(false);
@@ -178,25 +169,6 @@ private TextView ProfileName;
         newresLL.animate().translationX(-200).setInterpolator(new OvershootInterpolator()).setDuration(250);
     }
 
-    private void getRestNameAndSeats(final TextView tv) {
-        FirebaseDatabase.getInstance().getReference("restaurants").child(rid).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                RestObject obj=dataSnapshot.getValue(RestObject.class);
-                if(obj!=null){
-                    tv.setText(obj.getName());
-                    //seats
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-
-    }
 
     private void initialiseViews(){
         lv=findViewById(R.id.recep_lv);
@@ -247,6 +219,8 @@ private TextView ProfileName;
             }
         });
     }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -362,6 +336,27 @@ private TextView ProfileName;
         }).setNegativeButton("Cancel",null);
         builder.create().show();
     }
+    private void getRestNameAndSeats(final TextView tv) {
+        FirebaseDatabase.getInstance().getReference("restaurants").child(rid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                RestObject obj=dataSnapshot.getValue(RestObject.class);
+                if(obj!=null){
+                    tv.setText(obj.getName());
+                    //seats
+                    seats=obj.getSeats2()+obj.getSeats4()+obj.getSeats6();
+                    fab.setActivated(true);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
     private void setupTableSpinner(Spinner tabSel) {
         Integer[] tables=new Integer[seats];
         for(int i=0;i<seats;i++){
@@ -382,7 +377,6 @@ private TextView ProfileName;
             }
         });
     }
-
 
     private void notifyCook(final int tabl, final String sid) {
         FirebaseDatabase.getInstance().getReference("selections").child(rid).child(sid).child("choice").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -410,46 +404,15 @@ private TextView ProfileName;
         });
 
     }
-
-    private void showQrCode(String selChefKey) {
+    public  void showQrCode(String selChefKey) {
         AlertDialog.Builder builder=new AlertDialog.Builder(ReceptionistActivity.this);
-        View view=LayoutInflater.from(ReceptionistActivity.this).inflate(R.layout.qr_code_img,null);
+        View view= LayoutInflater.from(ReceptionistActivity.this).inflate(R.layout.qr_code_img,null);
         builder.setView(view);
         ImageView imgView=view.findViewById(R.id.qr_code_imgView);
-        generateQr(selChefKey,imgView);
+        String jsonString="{\"rid\":\""+rid+"\",\"selForChefKey\":\""+selChefKey+"\"}";
+        utilityClass.generateQr(imgView,jsonString);
         builder.setPositiveButton("Finish", null);
         builder.create().show();
-    }
-        private void generateQr(String selChefKey, ImageView img){
-        String JsonStaff="{\"rid\":\""+rid+"\",\"selForChefKey\":\""+selChefKey+"\"}";
-        try{
-            Bitmap bitmap=encodeAsBitmap(JsonStaff);
-            img.setImageBitmap(bitmap);
-        }catch (WriterException e){
-            e.printStackTrace();
-        }
-    }
-        private Bitmap encodeAsBitmap(String json) throws WriterException {
-        BitMatrix result;
-        try{
-            int WIDTH = 300;
-            result=new MultiFormatWriter().encode(json
-                    , BarcodeFormat.QR_CODE, WIDTH, WIDTH,null);
-        } catch (IllegalArgumentException iae) {
-            // Unsupported format
-            return null;
-        } int w = result.getWidth();
-        int h = result.getHeight();
-        int[] pixels = new int[w * h];
-        for (int y = 0; y < h; y++) {
-            int offset = y * w;
-            for (int x = 0; x < w; x++) {
-                pixels[offset + x] = result.get(x, y) ? BLACK : WHITE;
-            }
-        }
-        Bitmap bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
-        bitmap.setPixels(pixels, 0, w, 0, 0, w, h);
-        return bitmap;
     }
 
     private void setName(final TextView name, String uid){
@@ -486,7 +449,7 @@ private TextView ProfileName;
                 return true;
             }
             case R.id.action_recep_manual_att:{
-                Intent intent=new Intent(ReceptionistActivity.this,ManualAttendenceActivity.class);
+                Intent intent=new Intent(ReceptionistActivity.this, ManualAttendanceActivity.class);
                 intent.putExtra("rid",rid);
                 startActivity(intent);
                 closeFabMenu();
@@ -497,6 +460,7 @@ private TextView ProfileName;
             }
         }
     }
+
 
     private void populateDrawer(){
 
@@ -582,5 +546,4 @@ private TextView ProfileName;
             }
         });
     }
-
 }

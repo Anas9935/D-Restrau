@@ -127,6 +127,8 @@ private ConstraintLayout cl;
         FirebaseDatabase.getInstance().getReference("restaurants").child(rid).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                boolean[] allChecked={false,false,false};
+                int seats=0;
                 switch (dataSnapshot.getKey()){
                     case "manUid":{
                         String manId=dataSnapshot.getValue(String.class);
@@ -134,10 +136,57 @@ private ConstraintLayout cl;
                         getMessages(manId);
                         break;
                     }
-                    case "seats":{
-                        Integer seats=dataSnapshot.getValue(Integer.class);
-                        if(seats!=null){
-                            setupSpinner(seats);
+                    case "seats2":{
+                        Integer seat=dataSnapshot.getValue(Integer.class);
+                        if(seat!=null){
+                           seats+=seat;
+                           allChecked[0]=true;
+                           int flag=0;
+                           for(boolean check:allChecked){
+                               if(!check){
+                                   flag=1;
+                               }
+                           }
+                           if(flag==0)
+                           {
+                               setupSpinner(seats);
+                           }
+                        }
+                        break;
+                    }
+                    case "seats4":{
+                        Integer seat=dataSnapshot.getValue(Integer.class);
+                        if(seat!=null){
+                            seats+=seat;
+                            allChecked[1]=true;
+                            int flag=0;
+                            for(boolean check:allChecked){
+                                if(!check){
+                                    flag=1;
+                                }
+                            }
+                            if(flag==0)
+                            {
+                                setupSpinner(seats);
+                            }
+                        }
+                        break;
+                    }
+                    case "seats6":{
+                        Integer seat=dataSnapshot.getValue(Integer.class);
+                        if(seat!=null){
+                            seats+=seat;
+                            allChecked[2]=true;
+                            int flag=0;
+                            for(boolean check:allChecked){
+                                if(!check){
+                                    flag=1;
+                                }
+                            }
+                            if(flag==0)
+                            {
+                                setupSpinner(seats);
+                            }
                         }
                         break;
                     }

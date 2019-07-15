@@ -1,4 +1,4 @@
-package com.example.drestrau;
+package com.example.drestrau.Activities.User;
 
 import
         android.graphics.Bitmap;
@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.example.drestrau.Activities.utilityClass;
 import com.example.drestrau.Objects.menuObject;
 import com.example.drestrau.Objects.quantatySelected;
+import com.example.drestrau.R;
 import com.example.drestrau.RoomRelated.MyOrderObject;
 import com.example.drestrau.RoomRelated.OrderDatabase;
 import com.google.firebase.auth.FirebaseAuth;
@@ -305,7 +306,10 @@ public class BillFragment extends Fragment {
         bill_disc.append(String.valueOf(disc));
       //  bill_tot_amt.setText(String.valueOf(amt-disc));
         //bill_Disc
-        generateQr();
+        String jsonString="{\"uid\":\""+uid+"\",\"rid\":\""+rid+"\",\"selKey\":\""+selKey+"\"," +
+                "\"payKey\":\""+payKey+"\",\"date\":\""+datestamp+"\",\"time\":\""+time+"\"}";
+        utilityClass.generateQr(bill_qrcode,jsonString);
+    //    generateQr();
 
     }
     private void getRestDetails(){
@@ -340,11 +344,11 @@ public class BillFragment extends Fragment {
         });
 
     }
-
-
+  /*
     private void generateQr(){
         String uid= FirebaseAuth.getInstance().getUid();
-        String JsonStaff="{\"uid\":\""+uid+"\",\"rid\":\""+rid+"\",\"selKey\":\""+selKey+"\",\"payKey\":\""+payKey+"\",\"date\":\""+datestamp+"\",\"time\":\""+time+"\"}";
+        String JsonStaff="{\"uid\":\""+uid+"\",\"rid\":\""+rid+"\",\"selKey\":\""+selKey+"\"," +
+                "\"payKey\":\""+payKey+"\",\"date\":\""+datestamp+"\",\"time\":\""+time+"\"}";
         try{
             Bitmap bitmap=encodeAsBitmap(JsonStaff);
             bill_qrcode.setImageBitmap(bitmap);
@@ -373,4 +377,5 @@ public class BillFragment extends Fragment {
         bitmap.setPixels(pixels, 0, w, 0, 0, w, h);
         return bitmap;
     }
+*/
 }

@@ -11,15 +11,12 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     >
-    <EditText
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content" />
-    <ImageView
-        android:layout_width="34dp"
-        android:layout_height="34dp"
-        app:srcCompat="@drawable/ic_search_black_24dp"
-        />
+    <SearchView
+        android:id="@+id/search_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </SearchView>
+
 </LinearLayout>
     <ListView
         android:layout_width="match_parent"

@@ -23,7 +23,6 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
-import com.google.zxing.integration.android.IntentIntegrator;
 
 import static android.graphics.Color.BLACK;
 import static android.graphics.Color.WHITE;
@@ -49,9 +48,9 @@ private ImageView qrcode;
         qrStatus=findViewById(R.id.qr_status);
         Log.e("rid", "onCreate: "+rid );
            getSid();
-        getAttendenceDetail();
+        getAttendanceDetail();
     }
-    private void getAttendenceDetail(){
+    private void getAttendanceDetail(){
         //TODO get the details of the staff from attendence table
         FirebaseDatabase.getInstance().getReference("attendance").child(staffId).child("attendanceToday").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -84,7 +83,9 @@ private ImageView qrcode;
                     name.append(" "+object.getName2());
                     name.append(" "+object.getName3());
                     sid.setText(object.getSid());
-                    generateQr(object.getSid());
+                    String JsonStaff="{\"uid\":\""+uid+"\",\"sid\":\""+ object.getSid()+"\"}";
+                    utilityClass.generateQr(qrcode,JsonStaff);
+                   // generateQr(object.getSid());
                 }
             }
 
@@ -109,9 +110,10 @@ private ImageView qrcode;
             }
         });
     }
+    /*
     private void generateQr(String id){
         String uid= FirebaseAuth.getInstance().getUid();
-        String JsonStaff="{\"uid\":\""+uid+"\",\"sid\":\""+id+"\"}";
+
         try{
             Bitmap bitmap=encodeAsBitmap(JsonStaff);
             qrcode.setImageBitmap(bitmap);
@@ -140,4 +142,5 @@ private ImageView qrcode;
         bitmap.setPixels(pixels, 0, w, 0, 0, w, h);
         return bitmap;
     }
+*/
 }

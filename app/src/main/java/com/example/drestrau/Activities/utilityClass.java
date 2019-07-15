@@ -1,21 +1,35 @@
 package com.example.drestrau.Activities;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 
 import com.example.drestrau.Objects.menuObject;
 import com.example.drestrau.Objects.quantatySelected;
+import com.example.drestrau.R;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+
+import static android.graphics.Color.BLACK;
+import static android.graphics.Color.WHITE;
 
 public class utilityClass {
 
@@ -100,5 +114,38 @@ public class utilityClass {
             }
 
         }
+    }
+
+
+    public static  void generateQr( ImageView img,String jsonString){
+       // String JsonStaff="{\"rid\":\""+rid+"\",\"selForChefKey\":\""+selChefKey+"\"}";
+        try{
+            Bitmap bitmap=encodeAsBitmap(jsonString);
+            img.setImageBitmap(bitmap);
+        }catch (WriterException e){
+            e.printStackTrace();
+        }
+    }
+    private static Bitmap encodeAsBitmap(String json) throws WriterException {
+        BitMatrix result;
+        try{
+            int WIDTH = 300;
+            result=new MultiFormatWriter().encode(json
+                    , BarcodeFormat.QR_CODE, WIDTH, WIDTH,null);
+        } catch (IllegalArgumentException iae) {
+            // Unsupported format
+            return null;
+        } int w = result.getWidth();
+        int h = result.getHeight();
+        int[] pixels = new int[w * h];
+        for (int y = 0; y < h; y++) {
+            int offset = y * w;
+            for (int x = 0; x < w; x++) {
+                pixels[offset + x] = result.get(x, y) ? BLACK : WHITE;
+            }
+        }
+        Bitmap bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+        bitmap.setPixels(pixels, 0, w, 0, 0, w, h);
+        return bitmap;
     }
 }

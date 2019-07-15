@@ -38,24 +38,12 @@ import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
 public class ProfileActivity extends AppCompatActivity {
-    private String uid;
-    private String rid;
-    private String staffId;
-    private TextView name;
-    private TextView email;
-    private TextView phno1;
-    private TextView phno2;
-    private TextView address1;
-    private TextView address2;
-    private TextView id;
-    private TextView pin;
+    private String uid,rid;
+    private TextView name,email,phno1,phno2,address1,address2,id,pin;
     private Toolbar toolbar;
     private ImageView img;
     //for the attendence
-    private TextView pres;
-    private TextView abs;
-    private TextView sal;
-    private TextView register_rest;
+    private TextView pres,abs,sal,register_rest;
     private LinearLayout attendanceLayout;
     private int isStaff=-1;
     @Override
@@ -164,7 +152,7 @@ public class ProfileActivity extends AppCompatActivity {
         pn=view.findViewById(R.id.edit_dialog_pin);
         update=view.findViewById(R.id.edit_dialog_update);
 
-        if(staffId!=null){
+        if(isStaff==1){
             message.setVisibility(View.VISIBLE);
         }else{
             message.setVisibility(View.GONE);

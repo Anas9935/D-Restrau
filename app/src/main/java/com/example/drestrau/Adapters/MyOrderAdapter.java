@@ -3,8 +3,6 @@ package com.example.drestrau.Adapters;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,16 +13,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.drestrau.Activities.User.GeneralMyOrdersFragment;
-import com.example.drestrau.Activities.User.GeneralUserNew;
 import com.example.drestrau.Activities.User.Reservations;
 import com.example.drestrau.Activities.utilityClass;
-import com.example.drestrau.BillFragment;
 import com.example.drestrau.Objects.RestObject;
 import com.example.drestrau.Objects.menuObject;
 import com.example.drestrau.Objects.quantatySelected;
@@ -36,20 +28,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.MultiFormatWriter;
-import com.google.zxing.WriterException;
-import com.google.zxing.common.BitMatrix;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.regex.Pattern;
-
-import static android.graphics.Color.BLACK;
-import static android.graphics.Color.WHITE;
 
 public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.CustomViewHolder> {
     private static final int WIDTH = 300;
@@ -124,7 +108,11 @@ public MyOrderAdapter(Context context, ArrayList<MyOrderObject> ls){
                 builder.setView(view);
                 ImageView img=view.findViewById(R.id.my_order_qr_img);
                 TextView txt=view.findViewById(R.id.my_order_qr_text);
-                generateQr(current.getRid(),img,current.getSid(),current.getPid(),current.getDateStamp(),current.getTimeIndex());
+                String uid= FirebaseAuth.getInstance().getUid();
+                String jsonString="{\"uid\":\""+uid+"\",\"rid\":\""+current.getRid()+"\",\"selKey\":\""+current.getSid()+"\"," +
+                        "\"payKey\":\""+current.getPid()+"\",\"date\":\""+current.getDateStamp()+"\",\"time\":\""+current.getTimeIndex()+"\"}";
+                utilityClass.generateQr(img,jsonString);
+             //   generateQr(current.getRid(),img,current.getSid(),current.getPid(),current.getDateStamp(),current.getTimeIndex());
                 long dateToday=System.currentTimeMillis();
 
                 String dateSel=utilityClass.getDate(current.getDateStamp());
@@ -151,37 +139,6 @@ public MyOrderAdapter(Context context, ArrayList<MyOrderObject> ls){
             }
         });
 
-    }
-    private void generateQr(String rid,ImageView img,String selKey,String payKey,long datestamp,int time){
-        String uid= FirebaseAuth.getInstance().getUid();
-        String JsonStaff="{\"uid\":\""+uid+"\",\"rid\":\""+rid+"\",\"selKey\":\""+selKey+"\",\"payKey\":\""+payKey+"\",\"date\":\""+datestamp+"\",\"time\":\""+time+"\"}";
-        try{
-            Bitmap bitmap=encodeAsBitmap(JsonStaff);
-            img.setImageBitmap(bitmap);
-        }catch (WriterException e){
-            e.printStackTrace();
-        }
-    }
-    private Bitmap encodeAsBitmap(String json) throws WriterException {
-        BitMatrix result;
-        try{
-            result=new MultiFormatWriter().encode(json
-                    , BarcodeFormat.QR_CODE,WIDTH,WIDTH,null);
-        } catch (IllegalArgumentException iae) {
-            // Unsupported format
-            return null;
-        } int w = result.getWidth();
-        int h = result.getHeight();
-        int[] pixels = new int[w * h];
-        for (int y = 0; y < h; y++) {
-            int offset = y * w;
-            for (int x = 0; x < w; x++) {
-                pixels[offset + x] = result.get(x, y) ? BLACK : WHITE;
-            }
-        }
-        Bitmap bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
-        bitmap.setPixels(pixels, 0, w, 0, 0, w, h);
-        return bitmap;
     }
     private void setNameAndAddress(final TextView name, final TextView address, String rid) {
         FirebaseDatabase.getInstance().getReference("restaurants").child(rid).addListenerForSingleValueEvent(new ValueEventListener() {

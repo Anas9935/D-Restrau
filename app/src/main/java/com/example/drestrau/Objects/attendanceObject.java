@@ -1,11 +1,11 @@
 package com.example.drestrau.Objects;
 
 public class attendanceObject {
-    private int dayCount;
-    private int payDue;
-    private int maxDayOfMonth;
+    private int dayCount=0;
+    private int payDue=0;
+    private int maxDayOfMonth=0;
     private long lastPaidDate;
-    private int attendanceToday;
+    private int attendanceToday=0;
     public attendanceObject(){}
     public attendanceObject(int dc, int pd, int mdm, long presDate, int attToday){
         dayCount=dc;

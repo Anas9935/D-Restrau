@@ -41,16 +41,9 @@ import java.util.Date;
 
 public class Reservations extends AppCompatActivity {
     private static final String TAG = "Reservations";
-    private String choice;
-private String rid;
-private TextView resName;
-    private TextView food;
-    private TextView qty;
-    private TextView amt;
-    private TextView totAmt;
-    private TextView dateSel;
-    private TextView status;
-    private TextView discount;
+    private String choice,rid;
+private TextView resName,food,qty,amt,totAmt,dateSel,status,discount;
+
 private ImageView calender;
 private Spinner timepick;
 private EditText nop;

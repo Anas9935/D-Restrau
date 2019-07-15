@@ -8,12 +8,20 @@ import com.example.drestrau.R;
 
 import com.example.drestrau.TestingActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class GeneralUserNew extends AppCompatActivity {
 
@@ -60,6 +68,12 @@ public class GeneralUserNew extends AppCompatActivity {
 
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navView.setSelectedItemId(R.id.action_general_home);
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.general_fragment_container);
+        fragment.onActivityResult(requestCode, resultCode, data);
     }
 
 }

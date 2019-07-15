@@ -27,7 +27,7 @@
         <activity
             android:name=".Activities.User.GeneralUserNew"
             android:label="@string/title_activity_general_user_new" />
-        <activity android:name=".Activities.ManualAttendenceActivity" />
+        <activity android:name=".Activities.ManualAttendanceActivity" />
         <activity android:name=".Activities.Manager.MessageActivity" />
         <activity android:name=".Activities.Manager.PaymentForManagerActivity" />
         <activity android:name=".Activities.User.PaymentForFoodActivity" />

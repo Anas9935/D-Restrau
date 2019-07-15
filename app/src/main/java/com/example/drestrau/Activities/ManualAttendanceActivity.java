@@ -26,7 +26,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class ManualAttendenceActivity extends AppCompatActivity {
+public class ManualAttendanceActivity extends AppCompatActivity {
 private String rid;
     private String uid;
 private ListView lv;
@@ -66,9 +66,9 @@ private allStaffAdapter adapter;
                             }
                             obj.setAttendenceToday(1);
                             FirebaseDatabase.getInstance().getReference("attendance").child(rid).child(object.getStaffId()).setValue(obj);
-                            Toast.makeText(ManualAttendenceActivity.this, "Attendance done", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ManualAttendanceActivity.this, "Attendance done", Toast.LENGTH_SHORT).show();
                         }
-                        }else{Toast.makeText(ManualAttendenceActivity.this,"Attendance Already Done",Toast.LENGTH_SHORT).show();}
+                        }else{Toast.makeText(ManualAttendanceActivity.this,"Attendance Already Done",Toast.LENGTH_SHORT).show();}
                     }
 
                     @Override
