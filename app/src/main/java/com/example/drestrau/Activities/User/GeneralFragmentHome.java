@@ -114,7 +114,12 @@ public class GeneralFragmentHome extends Fragment {
                 pincode.setVisibility(View.VISIBLE);
                 pincodeEditLL.setVisibility(View.GONE);
                 String newPin=pincodeEdit.getText().toString();
-                FirebaseDatabase.getInstance().getReference("users").child(uid).child("pincode").setValue(Long.parseLong(newPin));
+                String oldPin=pincode.getText().toString();
+                if(!oldPin.equals(newPin))
+                {
+                    FirebaseDatabase.getInstance().getReference("users").child(uid).child("pincode").setValue(Long.parseLong(newPin));
+                    pincode.setText(newPin);
+                }
             }
         });
         signoutBtn.setOnClickListener(new View.OnClickListener() {

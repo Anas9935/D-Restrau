@@ -440,7 +440,7 @@
                     android:id="@+id/icon2"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    app:srcCompat="@drawable/qrcode"
+                    app:srcCompat="@drawable/address"
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="20dp"
                     android:layout_marginStart="10dp"
@@ -462,7 +462,7 @@
                 <TextView android:id="@+id/subTitle2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Your Qr Code for Attendence"
+                    android:text="The details of Your restaurant"
                     android:layout_toEndOf="@+id/icon2"
                     android:layout_below="@+id/simple_title2"
                     android:layout_alignParentEnd="true" />

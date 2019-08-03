@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/button_cover"
+    >
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_lens_black_24dp"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="8sp"
+        />
+    <TextView
+        android:id="@+id/bill_item_food_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Name Of The Food "
+        android:textSize="16sp"
+        android:layout_gravity="center_vertical"
+        android:maxLength="28"
+        android:ellipsize="end"
+        />
+    <View
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="10dp"
+        android:layout_gravity="center_vertical"
+        />
+    <TextView
+        android:id="@+id/bill_item_quanAndamt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+       tools:text="2 × ₹2100"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="16dp"
+        />
+    <ImageView
+        android:id="@+id/bill_item_cross"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/ic_menu_close_clear_cancel"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="16dp"
+        />
+</LinearLayout>

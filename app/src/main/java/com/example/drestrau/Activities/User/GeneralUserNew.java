@@ -39,6 +39,8 @@ public class GeneralUserNew extends AppCompatActivity {
                 }
                 case R.id.action_general_PastOrder:{
                     selectedFragment=new GeneralMyOrdersFragment();
+                    Intent intent=new Intent(GeneralUserNew.this,TestingActivity.class);
+                    startActivity(intent);
                     break;
                 }
                 case R.id.action_general_search:{

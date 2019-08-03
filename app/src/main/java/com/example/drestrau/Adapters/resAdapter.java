@@ -46,10 +46,10 @@ private final ArrayList<RestObject> list;
 
         name.setText(current.getName());
         add1.setText(current.getAdd1());
-        add2.setText(current.getAdd2());
-        add3.setText(current.getAdd3());
+        add2.setText(" "+current.getAdd2());
+        add3.setText(" "+current.getAdd3());
         contact.setText(String.valueOf(current.getPhno()));
-        timing.setText(current.getOpening()+":00-:"+current.getClosing()+":00");
+        timing.setText(current.getOpening()+":00-"+current.getClosing()+":00");
         if(current.getpictureUrl()!=null){
             Glide.with(getContext())
                     .load(current.getpictureUrl())

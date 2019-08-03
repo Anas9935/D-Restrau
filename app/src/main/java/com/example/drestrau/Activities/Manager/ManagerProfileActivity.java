@@ -426,7 +426,7 @@ private Bitmap bitmapImage;
 
         {
             FirebaseStorage storage=FirebaseStorage.getInstance();
-            final StorageReference storeRef=storage.getReference().child("rest_pics").child(object.getRid()+".jpg");
+            final StorageReference storeRef=storage.getReference().child("staff_pics").child(object.getRid()).child(object.getSid()+".jpg");
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             bitmapImage.compress(Bitmap.CompressFormat.JPEG, 60, baos);
             byte[] data = baos.toByteArray();

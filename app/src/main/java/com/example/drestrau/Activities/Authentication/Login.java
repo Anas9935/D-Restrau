@@ -141,14 +141,14 @@ private FirebaseAuth mAuth;
         super.onStart();
         FirebaseUser current=mAuth.getCurrentUser();
         if(current!=null){
-            Progbar.setVisibility(View.VISIBLE);
+            disableAllViews();
         }
         //do when already entered
         enterUser(current);
     }
 
     private void login(){
-        Progbar.setVisibility(View.VISIBLE);
+        disableAllViews();
         String email=emailTV.getText().toString();
         String  password=passwordTV.getText().toString();
         mAuth.signInWithEmailAndPassword(email, password)
@@ -165,6 +165,8 @@ private FirebaseAuth mAuth;
                         Log.e("thisAuth", "signInWithEmail:failure"+task.getException().getLocalizedMessage());
                         if(task.getException().getMessage().equals("A network error (such as timeout, interrupted connection or unreachable host) has occurred.")){
                             noNet.setVisibility(View.VISIBLE);
+                            EnableAllViews();
+                            Progbar.setVisibility(View.INVISIBLE);
                         }
                         Toast.makeText(Login.this, "Login failed.", Toast.LENGTH_SHORT).show();
                         enterUser(null);
@@ -174,10 +176,9 @@ private FirebaseAuth mAuth;
 }
 
         private void enterUser(final FirebaseUser user){
+         if(user==null){
 
-           // final int[] desig=new int[]{-1};
-            if(user==null){
-                Progbar.setVisibility(View.GONE);
+                    EnableAllViews();
                 return;
             }
             FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -252,23 +253,22 @@ private FirebaseAuth mAuth;
             });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_login,menu);
-        return true;
+    private void disableAllViews(){
+        Log.e("this", "DisableAllViews: "+"views Disabled" );
+        Progbar.setVisibility(View.VISIBLE);
+      RelativeLayout parent=findViewById(R.id.login_parentLayout);
+      for(int i=0;i<parent.getChildCount();i++){
+          View view=parent.getChildAt(i);
+          view.setEnabled(false);
+      }
     }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.action_testing:{
-                Intent intent=new Intent(Login.this, TestingActivity.class);
-                startActivity(intent);
-                return true;
-            }
-            default:{
-                return super.onOptionsItemSelected(item);
-            }
+    private void EnableAllViews(){
+        Log.e("this", "EnableAllViews: "+"views enabled" );
+        Progbar.setVisibility(View.GONE);
+        RelativeLayout parent=findViewById(R.id.login_parentLayout);
+        for(int i=0;i<parent.getChildCount();i++){
+            View view=parent.getChildAt(i);
+            view.setEnabled(true);
         }
     }
 }

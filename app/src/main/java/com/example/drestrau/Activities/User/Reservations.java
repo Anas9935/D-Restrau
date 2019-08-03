@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -20,6 +21,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.drestrau.Adapters.billItemAdapter;
+import com.example.drestrau.Objects.bill_item_object;
 import com.example.drestrau.Objects.menuObject;
 import com.example.drestrau.Objects.quantatySelected;
 import com.example.drestrau.Objects.selection;
@@ -42,7 +45,8 @@ import java.util.Date;
 public class Reservations extends AppCompatActivity {
     private static final String TAG = "Reservations";
     private String choice,rid;
-private TextView resName,food,qty,amt,totAmt,dateSel,status,discount;
+private TextView resName,totAmt,dateSel,status,discount;
+//TextView food,qty,amt;
 
 private ImageView calender;
 private Spinner timepick;
@@ -51,9 +55,10 @@ private Button pay;
 private Switch res;
 
 private int timeindex;
-    private int nos;
+   // private int nos;
     private int noRems;
 private String selKey;
+    int seats=0;
 
 private long datestamp;
 
@@ -68,14 +73,14 @@ private ArrayList<menuObject> list;
 
 private int fullOffer;
 private boolean dataRec=false;
-private boolean isAvailable=false;
+//private boolean isAvailable=false;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservations);
-
+        Log.e(TAG, "onCreate: " );
         initializeViews();
         choice=getIntent().getStringExtra("choice");
         rid=getIntent().getStringExtra("rid");
@@ -87,14 +92,15 @@ private boolean isAvailable=false;
         //-----------------------------------------
         Calendar calendar=Calendar.getInstance();
         int year=calendar.get(Calendar.YEAR);
-        int month=calendar.get(Calendar.MONTH);
+        int month=calendar.get(Calendar.MONTH)+1;
         int day=calendar.get(Calendar.DAY_OF_MONTH);
-        String todayDate=day+"/"+month+1+"/"+year;
-        DateFormat format=new SimpleDateFormat("dd/mm/yyyy");
+        String todayDate=day+"-"+month+"-"+year;
+        DateFormat format=new SimpleDateFormat("dd-mm-yyyy");
         try {
             Date date=format.parse(todayDate);
             dateSel.setText(todayDate);
             datestamp=date.getTime()/1000;
+           // Log.e(TAG, "onCreate: "+datestamp );
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -115,18 +121,21 @@ private boolean isAvailable=false;
             @Override
             public void onClick(View v) {
                 if(dataRec){
-                    gotoPayment();
+                   // gotoPayment();
+                    checkAvailable();
                 }
             }
         });
 
     }
+
+
     private void initializeViews(){
         discount=findViewById(R.id.res_discAmt);
         resName=findViewById(R.id.res_text1);
-        food=findViewById(R.id.res_sel_food);
-        qty=findViewById(R.id.res_sel_qty);
-        amt=findViewById(R.id.res_sel_amt);
+      //  food=findViewById(R.id.res_sel_food);
+       // qty=findViewById(R.id.res_sel_qty);
+       // amt=findViewById(R.id.res_sel_amt);
         totAmt=findViewById(R.id.res_finalAmt);
         dateSel=findViewById(R.id.res_datesel);
         status=findViewById(R.id.res_time_available);
@@ -141,7 +150,105 @@ private boolean isAvailable=false;
     }
 
     private void getResDetails(){
-            resRef.child(rid).addChildEventListener(new ChildEventListener() {
+        Log.e(TAG, "getResDetails: " );
+        FirebaseDatabase.getInstance().getReference("restaurants").child(rid).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                boolean[] allChecked={false,false,false};
+
+                switch (dataSnapshot.getKey()){
+                    case "name":{
+                        resName.setText(dataSnapshot.getValue(String.class));
+                        break;
+                    }
+                    case "offer":{
+                        Integer off=dataSnapshot.getValue(Integer.class);
+                        if(off!=null){
+                            spclDisc.setVisibility(View.VISIBLE);
+                        }else{
+                            spclDisc.setVisibility(View.INVISIBLE);
+                        }
+                        break;
+                    }
+                    case "seats2":{
+                        Integer seat=dataSnapshot.getValue(Integer.class);
+                        if(seat!=null){
+                            seats+=seat;
+                            allChecked[0]=true;
+                            int flag=0;
+                            for(boolean check:allChecked){
+                                if(!check){
+                                    flag=1;
+                                }
+                            }
+                            if(flag==0)
+                            {
+                                //return seats
+                            }
+                        }
+                        break;
+                    }
+                    case "seats4":{
+                        Integer seat=dataSnapshot.getValue(Integer.class);
+                        if(seat!=null){
+                            seats+=seat;
+                            allChecked[1]=true;
+                            int flag=0;
+                            for(boolean check:allChecked){
+                                if(!check){
+                                    flag=1;
+                                }
+                            }
+                            if(flag==0)
+                            {
+                               //return seats
+                            }
+                        }
+                        break;
+                    }
+                    case "seats6":{
+                        Integer seat=dataSnapshot.getValue(Integer.class);
+                        if(seat!=null){
+                            seats+=seat;
+                            allChecked[2]=true;
+                            int flag=0;
+                            for(boolean check:allChecked){
+                                if(!check){
+                                    flag=1;
+                                }
+                            }
+                            if(flag==0)
+                            {
+                               //return seats
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        /*
+        resRef.child(rid).addChildEventListener(new ChildEventListener() {
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                     switch (dataSnapshot.getKey()){
@@ -159,10 +266,7 @@ private boolean isAvailable=false;
                             break;
                         }
                         case "seats":{
-                            Integer seat=dataSnapshot.getValue(Integer.class);
-                            if(seat!=null){
-                                nos=seat;
-                            }
+
                             break;
                         }
                     }
@@ -188,10 +292,12 @@ private boolean isAvailable=false;
 
                 }
             });
+        */
+        /*
         resRef.child(rid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                getmenu();
+
             }
 
             @Override
@@ -199,8 +305,11 @@ private boolean isAvailable=false;
 
             }
         });
+        */
+        getmenu();
     }
           private void getmenu(){
+              Log.e(TAG, "getmenu: " );
         menuRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
@@ -244,6 +353,15 @@ private boolean isAvailable=false;
 
     }
                 private void fillViews(){
+                    Log.e(TAG, "fillViews: " );
+        //-----------------------------------------------------
+                    //the list for food items
+                    ListView bill_lv=findViewById(R.id.res_food_item);
+                    ArrayList<bill_item_object> billList;
+                    billList=new ArrayList<>();
+                    billItemAdapter billAdapter=new billItemAdapter(this,billList,1);
+                    bill_lv.setAdapter(billAdapter);
+        //------------------------------------------------------
         //picking items from list through string choice and calculating the total values
     ArrayList<quantatySelected> itemsSel=new ArrayList<>();
 
@@ -254,24 +372,27 @@ private boolean isAvailable=false;
             //quantity.add(Integer.parseInt((String) quan));
 
             String food=items[i].substring(0,items[i].indexOf("("));
-          //  foodlist.add(Integer.parseInt(food));
             quantatySelected object=new quantatySelected(food,Integer.parseInt((String)quan));
             itemsSel.add(object);
         }
-
         //now we have the separated lists
-        food.setText("");
-        amt.setText("");
-        qty.setText("");
+    //    food.setText("");
+     //   amt.setText("");
+    //    qty.setText("");
         for( int i=0;i<itemsSel.size();i++){
            quantatySelected current=itemsSel.get(i);
 
            //finding the menu item in the list
             for(menuObject object:list){
                 if(object.getFid().equals(current.getFoodId())){
-                    food.append(object.getName()+"\n");
-                    amt.append(object.getPrice()*current.getQuantity()+"\n");
-                    qty.append(current.getQuantity()+"\n");
+                    //for the new type of adapter
+                    billAdapter.add(new bill_item_object(object.getName(),current.getQuantity(),(int)object.getPrice()));
+                    //------------------------------------
+//
+//                    food.append(object.getName()+"\n");
+//                    amt.append(object.getPrice()*current.getQuantity()+"\n");
+//                    qty.append(current.getQuantity()+"\n");
+//
                     baseamt+=object.getPrice()*current.getQuantity();
                     int dis=(int)object.getPrice()*current.getQuantity()*object.getOffer()/100;
                     disc+=dis;
@@ -279,10 +400,6 @@ private boolean isAvailable=false;
                     break;
                 }
             }
-
-
-
-
 
         }
         int finalamount=baseamt-disc;
@@ -299,6 +416,7 @@ private boolean isAvailable=false;
     }
 
     private void setupSpinner(){
+        Log.e(TAG, "setupSpinner: ");
         final ArrayAdapter<CharSequence> des=ArrayAdapter.createFromResource(this,R.array.timeSlot,android.R.layout.simple_spinner_item);
         des.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         timepick.setAdapter(des);
@@ -306,7 +424,7 @@ private boolean isAvailable=false;
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 timeindex=position-1;
-                checkAvailable();
+              //  checkAvailable();
 
             }
 
@@ -317,72 +435,11 @@ private boolean isAvailable=false;
             }
         });
     }
-         private void checkAvailable(){
-        //get the time occupied on that day and time
-        if(res.isChecked()){
-            //takeaway Always available unless Shop's not Open
-            status.setText("Available");
-            isAvailable=true;
-        }else{
-            final int[] count=new int[1];
-            FirebaseDatabase.getInstance().getReference("selections").child(rid).addChildEventListener(new ChildEventListener() {
-                @Override
-                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                    selection obj=dataSnapshot.getValue(selection.class);
-                    //datestamp
-                    if(obj!=null&&obj.getDate()==datestamp&&obj.getTimeslot()==timeindex){
-                        count[0]++;
-                    }
-                }
 
-                @Override
-                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                }
-
-                @Override
-                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-                }
-
-                @Override
-                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
-
-            FirebaseDatabase.getInstance().getReference("selections").child(rid).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                 noRems=nos-count[0];
-                    Log.e(TAG, "onDataChange: "+noRems+"="+nos+"-"+count[0] );
-                 if(noRems>0){
-                     status.setText("Available");
-                     isAvailable=true;
-                 }else{
-                     status.setText("Seats Full. Try Another Time slot");
-                     isAvailable=false;
-                 }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
-
-
-
-        }
-    }
 
 
     private void getdate(){
+        Log.e(TAG, "getdate: " );
         final Calendar c = Calendar.getInstance();
         int mYear = c.get(Calendar.YEAR);
         int mMonth = c.get(Calendar.MONTH);
@@ -409,22 +466,76 @@ private boolean isAvailable=false;
         datePickerDialog.show();
     }
 
-    private void gotoPayment(){
+    private void checkAvailable(){
+        Log.e(TAG, "checkAvailable: " );
+        //get the time occupied on that day and time
+        if(res.isChecked()){
+            //takeaway Always available unless Shop's not Open
+            status.setText("Available");
+            gotoPayment(0);
+            return;
+        }
+        final int[] count=new int[1];
+        FirebaseDatabase.getInstance().getReference("selections").child(rid).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                selection obj=dataSnapshot.getValue(selection.class);
+                //datestamp
+                if(obj!=null&&obj.getDate()==datestamp&&obj.getTimeslot()==timeindex){
+                    count[0]++;
+                }
+            }
 
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        FirebaseDatabase.getInstance().getReference("selections").child(rid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                noRems=seats-count[0];
+                Log.e(TAG, "onDataChange: "+noRems+"="+seats+"-"+count[0] );
+                if(noRems>0){
+                    status.setText("Available");
+                    gotoPayment(1);
+                }else{
+                    status.setText("Seats Full. Try Another Time slot");
+                   // isAvailable=false;
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+    private void gotoPayment(int reserve){
+        Log.e(TAG, "gotoPayment: " );
         //two objwcts one is selection and one is payment
         //object is send to selection
-        int reserve;
-        if(res.isChecked()){
-            reserve=0;      //for takeaway
-            status.setText("Available");
-            isAvailable=true;
-        }else{
-            reserve=1;      //for reservation of Seat
-            checkAvailable();
-        }
+
         String numberop=nop.getText().toString();
 
-        if(isAvailable){
+      //  if(isAvailable){
         selection selection=new selection(FirebaseAuth.getInstance().getUid(),choice,timeindex,reserve,datestamp,Integer.parseInt(numberop));
         selKey=FirebaseDatabase.getInstance().getReference("selections").child(rid).push().getKey();
         if(selKey!=null) {
@@ -439,6 +550,6 @@ private boolean isAvailable=false;
             finish();
         }
 
-        }
+       // }
     }
 }

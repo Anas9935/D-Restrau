@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
 <ImageView
     android:id="@+id/rest_img"
@@ -62,13 +64,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Contact:-"
+                android:text="Contact-"
                 />
             <TextView
                 android:id="@+id/rest_contact"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Number"
+                tools:text="Number"
                 />
         </LinearLayout>
         <LinearLayout
@@ -85,7 +87,7 @@
                 android:id="@+id/rest_timing"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="opening-Closing"
+            tools:text="opening-Closing"
             />
         </LinearLayout>
 

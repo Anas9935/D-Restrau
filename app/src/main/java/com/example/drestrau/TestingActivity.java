@@ -2,12 +2,15 @@ package com.example.drestrau;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -40,14 +43,13 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class TestingActivity extends AppCompatActivity {
 private Button rest;
     private Button food;
-String key;
-ArrayList<MyOrderObject> list;
-MyOrderAdapter adapter;
-private RecyclerView rv;
+    ImageView color;
     private final String TAG="TestingActivity";
 
 
@@ -59,11 +61,13 @@ private RecyclerView rv;
 
         rest=findViewById(R.id.test_rest_btn);
         food=findViewById(R.id.test_food_btn);
-        rv=findViewById(R.id.testingRecycle);
+        color=findViewById(R.id.testingColors);
 
         rest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+               startChangingColor();
+              //  color.setBackgroundColor(Color.rgb(100,100,50));
 
             }
         });
@@ -76,6 +80,32 @@ private RecyclerView rv;
 
 
     }
+
+    private void startChangingColor() {
+        Handler handler = new Handler();
+        handler.postDelayed(runnable, 100);
+    }
+    private Runnable runnable = new Runnable() {
+        public void run() {
+            runOnUiThread(new Runnable() {
+                public void run()
+                {
+                    try {
+                        for(int i=0;i<255;i+=25){
+                            for(int j=0;j<255;j+=25){
+                                for( int k=0;k<255;k+=25){
+                                    color.setBackgroundColor(Color.rgb(i,j,k));
+                                }
+                            }
+
+                        }
+                    }catch(Exception e){
+                        //New exception
+                    }
+                }
+            });
+        }
+    };
 
 
     private void updateAttendance(String sid) {

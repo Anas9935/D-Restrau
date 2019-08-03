@@ -6,14 +6,14 @@
     android:layout_marginStart="8dp"
     android:layout_marginEnd="8dp"
     android:layout_height="130dp"
-    android:background="@drawable/back_for_text_dark">
+    android:background="@drawable/food_corners_bk">
     <ImageView
         android:id="@+id/general_food_img"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:src="@tools:sample/backgrounds/scenic"
         android:scaleType="fitXY"
-        android:background="@drawable/food_corners_bk"
+
         />
     <LinearLayout
         android:layout_width="match_parent"

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/myColorPrimaryLight"
     tools:context=".TestingActivity">
 <Button
     android:id="@+id/test_rest_btn"
@@ -18,10 +19,11 @@
         android:layout_height="wrap_content"
         android:text="food in rest"
         />
-<androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/testingRecycle"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-</androidx.recyclerview.widget.RecyclerView>
+    <ImageView
+        android:id="@+id/testingColors"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center" />
+
 </LinearLayout>
